@@ -1,0 +1,93 @@
+@import "./variables";
+@import "./mixin";
+
+.input {
+  text-decoration: none;
+  border: none;
+  outline: none;
+
+  padding: 0.8rem 1.8rem;
+  border-radius: 10px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.2rem;
+
+  caret-color: $color-secondary-light-2;
+  color: $color-text;
+
+  &::placeholder {
+    color: $color-secondary-light-2;
+    font-size: 1.2rem;
+    letter-spacing: 0;
+    font-weight: 300;
+  }
+
+  &[type="password"] {
+    letter-spacing: 0.13em;
+    font-weight: 700;
+    font-style: bold;
+  }
+
+  &:focus {
+    box-shadow: inset 0px 0px 18px 0px rgba($color-black, 0.15);
+    &::placeholder {
+      color: transparent;
+    }
+  }
+
+  &__wrapper {
+    width: 100%;
+    @include flexbox();
+    flex-direction: column;
+    row-gap: $row-gap;
+  }
+
+  &--tiny {
+    width: 60%;
+    height: 1.8rem;
+    font-size: 1rem;
+    padding: 0.2rem 1rem;
+    color: $color-text;
+    background-color: $color-primary-dark;
+
+    &::placeholder {
+      color: rgba($color-secondary-light-2, 0.2);
+      font-size: 1rem;
+      letter-spacing: 0;
+      font-weight: 300;
+    }
+
+    &:focus {
+    }
+  }
+
+  &--small {
+    width: calc(15rem - $column-gap/2);
+    background-color: $color-primary-dark;
+  }
+
+  &--medium {
+    max-width: 30rem;
+    background-color: $color-primary-dark;
+  }
+
+  &--template{
+    max-width: 25rem;
+    background-color: $color-primary;
+    &::placeholder {
+      color: rgba($color-text, 0.8);
+      // font-size: 1rem;
+      // letter-spacing: 0;
+      // font-weight: 300;
+    }
+  }
+
+  &__item {
+    max-width: 30rem;
+    @include flexbox();
+    column-gap: $column-gap;
+    flex-wrap: wrap;
+  }
+}

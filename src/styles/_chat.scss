@@ -1,0 +1,15 @@
+@import "./animations";
+@import "./variables";
+@import "./mixin";
+
+.chat {
+  &__wrapper {
+      width: 100%;
+      padding: 0 2rem;
+      transition: all 1.4s ease;
+  }
+
+  &__body{
+      height: calc(100vh - 4rem - 8rem);
+  }
+}

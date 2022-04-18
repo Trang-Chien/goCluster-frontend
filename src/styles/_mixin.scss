@@ -1,0 +1,58 @@
+@import "./variables";
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin neumorphic(){
+  box-shadow: 12px 12px 24px 0 rgba(0,0,0,.2), -12px -12px 24px 0 rgba(255, 255, 255,.06)
+}
+
+@mixin neumorphic-inner(){
+  box-shadow: inset 8px 8px 8px rgba(0,0,0,.1), inset -8px -8px 8px rgba(255, 255, 255,.03)
+}
+
+@mixin  borderleft() {
+  border-left: solid .1rem rgba($color-primary-light, 1);
+}
+
+@mixin  borderright() {
+  border-right: solid .1rem rgba($color-primary-light, 1);
+}
+
+@mixin boxshadow(){
+  box-shadow: 0px 0px 30px 12px rgba($color-black,0.12);
+
+}
+
+@mixin change-color-animation($name, $bg-from, $bg-to, $from, $to) {
+  @keyframes #{$name} {
+    0% {
+      background-color: $bg-from;
+      color: $from;
+    }
+    100% {
+      background-color: $bg-to;
+      color: $to;
+    }
+  }
+}
+
+@mixin slide-in-top-animation($name, $from, $from-opacity, $to, $to-opacity) {
+  @keyframes #{$name} {
+    0% {
+      transform: translateY($from);
+      opacity: $from-opacity;
+    }
+    100% {
+      transform: translateY(to);
+      opacity: $to-opacity;
+    }
+  }
+  
+}
+

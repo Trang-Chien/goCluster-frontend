@@ -1,0 +1,90 @@
+@import "./variables";
+@import "./animations";
+@import "./mixin";
+
+.icon {
+  color: $color-secondary-dark-1;
+  filter: drop-shadow(0px 3px 4px rgba($color-black, 0.15));
+
+  &:hover {
+    animation: 0.8s ease 0s 1 normal forwards scale-in;
+  }
+
+  &--back {
+    color: $color-secondary;
+    font-size: 1.8rem;
+    background-color: transparent;
+
+    // animation: 0.8s ease 0s 1 normal forwards change-color-secondary-out;
+
+    &:hover {
+      // animation:.8s ease 0s 1 normal forwards change-color-secondary-in;
+    }
+  }
+
+  &--green {
+    // color: $color-secondary-light;
+    animation: 0.8s ease 0s 1 normal forwards scale-out;
+
+    &:hover {
+      animation: 0.8s ease 0s 1 normal forwards scale-in;
+    }
+  }
+
+  &--green-light {
+    // color: $color-secondary;
+    animation: 0.8s ease 0s 1 normal forwards scale-out;
+
+    &:hover {
+      animation: 0.8s ease 0s 1 normal forwards scale-in;
+    }
+  }
+
+  &--pink {
+    // color: $color-pink;
+    animation: 0.8s ease 0s 1 normal forwards scale-out;
+
+    &:hover {
+      animation: 0.8s ease 0s 1 normal forwards scale-in;
+    }
+  }
+
+  &--yellow {
+    // color: $color-yellow-dark;
+    animation: 0.8s ease 0s 1 normal forwards scale-out;
+
+    &:hover {
+      animation: 0.8s ease 0s 1 normal forwards scale-in;
+    }
+  }
+
+  &--white {
+    animation: 0.8s ease 0s 1 normal forwards scale-out;
+
+    &:hover {
+      animation: 0.8s ease 0s 1 normal forwards scale-in;
+    }
+  }
+
+  &--medium {
+    font-size: 1.6rem;
+  }
+
+  &--close {
+    font-size: 3rem;
+    color: $color-secondary-dark;
+    animation: 0.8s ease 0s 1 normal forwards scale-out;
+
+
+  }
+
+  &--sun {
+    color: $color-sun;
+    font-size: $size-icon-medium;
+  }
+
+  &--luna {
+    color: $color-luna;
+    font-size: $size-icon-medium;
+  }
+}

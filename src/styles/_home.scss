@@ -1,0 +1,17 @@
+@import "./variables";
+@import "./animations";
+@import "./mixin";
+
+.home {
+  &__wrapper {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    background-color: $color-primary-dark;
+  }
+}

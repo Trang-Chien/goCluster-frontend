@@ -1,0 +1,250 @@
+@import "./variables";
+@import "./mixin";
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(200%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shadow-drop-bottom {
+  0% {
+    box-shadow: 0px 15px 30px 7px rgba($color-secondary, 0.3);
+    background-color: $color-secondary;
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0px 12px 20px -12px rgba($color-secondary, 0.7);
+    background-color: $color-secondary-light;
+    transform: scale(1.01);
+  }
+}
+
+@keyframes shadow-drop-bottom-out {
+  100% {
+    box-shadow: 0px 15px 30px 7px rgba($color-secondary, 0.3);
+    background-color: $color-secondary;
+    transform: scale(1);
+  }
+  0% {
+    box-shadow: 0px 12px 20px -12px rgba($color-secondary, 0.7);
+    background-color: $color-secondary-light;
+    transform: scale(1.01);
+  }
+}
+
+@keyframes inner-input-in {
+  100% {
+    box-shadow: inset 0px 2px 10px 0px rgba($color-secondary-dark, 0.07);
+    border: solid 0.08rem rgba($color-secondary-dark, 0.3);
+  }
+}
+
+@keyframes inner-input-out {
+  100% {
+    box-shadow: none;
+  }
+  0% {
+    box-shadow: inset 0px 2px 10px 0px rgba($color-secondary-dark, 0.07);
+  }
+}
+
+@keyframes dissolve {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes scale-out {
+  100% {
+    transform: scale(1);
+  }
+  0% {
+    transform: scale(1.2);
+  }
+}
+
+@include change-color-animation(
+  change-color-secondary-in,
+  transparent,
+  transparent,
+  $color-secondary,
+  $color-secondary-light
+);
+
+@include change-color-animation(
+  change-color-secondary-out,
+  transparent,
+  transparent,
+  $color-secondary-light,
+  $color-secondary
+);
+
+@include change-color-animation(
+  change-color-secondary-dark-in,
+  transparent,
+  transparent,
+  $color-secondary-dark,
+  $color-secondary
+);
+
+@include change-color-animation(
+  change-color-secondary-dark-out,
+  transparent,
+  transparent,
+  $color-secondary,
+  $color-secondary-dark
+);
+
+@include change-color-animation(
+  change-color-yellow-in,
+  transparent,
+  transparent,
+  $color-yellow-dark,
+  $color-yellow
+);
+
+@include change-color-animation(
+  change-color-yellow-out,
+  transparent,
+  transparent,
+  $color-yellow,
+  $color-yellow-dark
+);
+
+@include change-color-animation(
+  change-color-pink-in,
+  transparent,
+  transparent,
+  $color-pink,
+  $color-pink-light
+);
+
+@include change-color-animation(
+  change-color-pink-out,
+  transparent,
+  transparent,
+  $color-pink-light,
+  $color-pink
+);
+
+@include change-color-animation(
+  change-color-bg-secondary-in,
+  $color-primary,
+  rgba($color-primary-light,0.5) ,
+  $color-secondary-light-2,
+  $color-secondary-light-2
+);
+
+@include change-color-animation(
+  change-color-bg-secondary-out,
+  rgba($color-primary-light,0.5) ,
+  $color-primary,
+  $color-secondary-light-2,
+  $color-secondary-light-2
+);
+
+@include change-color-animation(
+  change-color-primary-in,
+  transparent,
+  transparent,
+  $color-primary,
+  $color-primary-light
+);
+
+@include change-color-animation(
+  change-color-primary-out,
+  transparent,
+  transparent,
+  $color-primary-light,
+  $color-primary
+);
+
+@include change-color-animation(
+  change-color-bg-primary-in,
+  $color-primary-light,
+  $color-secondary-light-2,
+  $color-secondary-dark,
+  $color-secondary-dark
+);
+
+@include change-color-animation(
+  change-color-bg-primary-out,
+  $color-secondary-light-2,
+  $color-primary-light,
+  $color-secondary-dark,
+  $color-secondary-dark
+);
+
+@include change-color-animation(
+  change-color-bg-blur,
+  rgba($color-primary-dark,0),
+  rgba($color-primary-dark,.95),
+  rgba($color-primary-dark,0),
+  rgba($color-primary-dark,.95)
+);
+
+@include change-color-animation(
+  change-color-bg-blur,
+  rgba($color-primary-dark,0),
+  rgba($color-black,.7),
+  rgba($color-primary-dark,0),
+  rgba($color-black,.7)
+);
+
+
+@include slide-in-top-animation(slide-in-top, -200%, 0, 0, 1);
+
+@include slide-in-top-animation(slide-in-top-dropdown, -200px, 1, 0, 1);
+
+
+// @keyframes clipout {
+//   0%{ clip-path: polygon(, 100% 50%, 50% 100%, 0 100%, 0 0); }
+//   100%   { clip-path: polygon(100% 0, 100% 100%, 100% 100%, 0 100%, 0 0); }
+// }
+@keyframes clipin{
+  0%{ opacity: 0;
+  transform: translate(-100%, -100%);
+  }
+  100%   { opacity: 1;
+  transform: translate(0,0);}  
+}

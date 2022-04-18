@@ -1,0 +1,75 @@
+@import "./variables";
+@import "./animations";
+@import "./mixin";
+
+.form {
+  &__wrapper {
+    background-color: $color-primary;
+    width: auto;
+    min-width: 35%;
+    height: auto;
+    border-radius: $border-radius-drawer;
+    padding: 4.1rem 6.8rem 6.2rem 6.8rem;
+
+    @include boxshadow();
+
+    &--1 {
+      animation: 2s ease 0s 1 normal forwards slide-in-top;
+    }
+
+    &--2 {
+      animation: 1.4s ease 0s 1 normal forwards dissolve;
+    }
+  }
+
+  &__title {
+    width: 100%;
+    &--header {
+      width: auto;
+      font-size: 2.4rem;
+      font-style: normal;
+      font-weight: 700;
+      color: $color-secondary-dark;
+      font-family: "Paytone One", sans-serif;
+    }
+    &--detail {
+      width: auto;
+      font-size: 1.2rem;
+      font-style: normal;
+      font-weight: 200;
+      color: $color-text;
+    }
+  }
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+    row-gap: $row-gap;
+  }
+}
+
+.welcome-form {
+  background-color: transparent;
+  opacity: 1;
+
+  @include flexbox();
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  row-gap: $row-gap-medium;
+}
+
+.login-form {
+  position: relative;
+  opacity: 1;
+  width: auto;
+  height: auto;
+
+  @include flexbox();
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  row-gap: $row-gap-medium;
+}

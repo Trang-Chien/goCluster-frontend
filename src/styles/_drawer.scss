@@ -1,0 +1,89 @@
+@import "./variables";
+@import "./animations";
+@import "./mixin";
+
+.drawer {
+  position: relative;
+  width: $drawer-size;
+  min-width: $drawer-size;
+  height: auto;
+  height: 100vh;
+  background-color: $color-primary;
+  transition: all 1.4s ease;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  z-index: 11;
+  @include boxshadow();
+  // @include neumorphic();
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &--left {
+    border-radius: 0 $border-radius-drawer $border-radius-drawer 0;
+  }
+
+  &--right {
+    border-radius: $border-radius-drawer 0 0 $border-radius-drawer;
+  }
+
+  &__wrapper {
+    height: 100%;
+  }
+
+  &__header {
+    position: fixed;
+    height: 4rem;
+    top: 0;
+    padding: 1rem;
+    @include flexbox();
+    align-items: center;
+    background-color: transparent;
+    
+    z-index: 1;
+
+    &--left {
+      width: $drawer-size;
+      align-items: flex-start;
+      // column-gap: $column-gap-small;
+      flex-wrap: wrap;
+      font-size: 1.8rem;
+      transition: all 1.4s ease;
+      border-radius: 0 $border-radius-drawer $border-radius-drawer 0;
+    }
+
+    &--right {
+      width: $drawer-size;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 1.8rem;
+      
+      border-radius: $border-radius-drawer 0 0 $border-radius-drawer;
+
+      &-noserver {
+        justify-content: flex-end;
+      }
+    }
+
+    &--boxshadow {
+      // box-shadow: 0px 15px 100px 20px rgba($color-secondary-dark, 0.3);
+    }
+  }
+
+  &__body {
+    position: absolute;
+    top: calc(1.8rem + 10px);
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 2.5rem 0;
+
+    @include flexbox();
+    flex-direction: column;
+    align-items: center;
+    row-gap: $row-gap-medium;
+
+    font-size: 1.8rem;
+  }
+}

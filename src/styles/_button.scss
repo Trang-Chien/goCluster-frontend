@@ -1,0 +1,93 @@
+@import "./variables";
+@import "./mixin";
+
+.button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: .3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--text {
+    border-radius: $border-radius-drawer;
+    text-transform: capitalize;
+    color: $color-secondary-light-2;
+    @include neumorphic();
+
+    border: none;
+
+    font-style: normal;
+    font-weight: 340;
+    font-size: 1.2rem;
+
+    padding: .8rem 2.4rem;
+
+    &:active{
+      @include neumorphic-inner();
+    }
+
+    &-dark{
+      background-color: $color-primary-dark;
+    }
+
+    &-light{
+      background-color: $color-primary;
+    }
+
+    &-secondary{
+      background-color: $color-secondary-dark-1;
+    }
+  }
+
+  &--copy{
+    width: 8rem;
+  }
+  
+
+  &--back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    animation: 0.8s ease 0s 1 normal forwards scale-out;
+
+    &:hover {
+      animation: 0.8s ease 0s 1 normal forwards scale-in;
+    }
+  }
+
+  &--1 {
+    width: 100%;
+  }
+
+  &--icon {
+    position: relative;
+    font-size: $size-icon-medium;
+    @include flexbox();
+    justify-content: center;
+    align-items: center;
+    border-radius: $border-radius-drawer;
+    // @include neumorphic();
+  }
+
+  &--noti-open{
+    background-color: $color-primary;
+    border-radius: $border-radius-drawer ;
+    z-index: 51;
+  }
+
+  &--close{
+    position: absolute;
+    top: auto;
+    right: .5rem;
+
+    &-profile {
+      position: absolute;
+      top: 0.5rem;
+      right: .5rem;
+    }
+  }
+}

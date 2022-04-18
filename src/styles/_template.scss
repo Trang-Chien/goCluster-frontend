@@ -1,0 +1,87 @@
+@import "./variables";
+@import "./animations";
+
+.template {
+  &__wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    max-height: 50rem;
+    width: 35rem;
+    z-index: 102;
+
+    background-color: $color-primary-dark;
+    border-radius: $border-radius-drawer;
+    // border: solid .15rem $color-secondary-dark-1;
+    animation: .8s ease 0s 1 normal forwards dissolve;
+
+    // @include boxshadow();
+  }
+
+  &__header {
+    width: 100%;
+    min-height: 5rem;
+    height: auto;
+    background-color: $color-primary-dark;
+    border-radius: $border-radius-drawer $border-radius-drawer 0 0;
+    // @include neumorphic();
+    box-shadow: 12px 12px 24px 0 rgba(0,0,0,.2) ;
+    color: $color-text;
+    font-size: 1.6rem;
+
+    @include flexbox();
+    align-items: center;
+    justify-content: center;
+
+    &--profile{
+      position: relative;
+      height: 10rem;
+    }
+  }
+
+  &__footer{
+    padding: 0 2rem 3rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__body{
+      padding: 2rem;
+      width: auto;
+      @include flexbox();
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      row-gap: $row-gap;
+
+      &--setting{
+        padding: 2rem;
+      width: auto;
+      @include flexbox();
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      row-gap: $row-gap;
+
+      }
+  }
+
+  &__title{
+  text-transform: capitalize;
+  color: $color-text;
+  font-weight: 500;
+  }
+
+  &__text{
+    color: $color-text;
+    font-size: 1.3rem;
+    font-weight: 200;
+  }
+
+  &__username{
+    margin: calc($avatar-size / 2 + 1rem) 1rem 1rem 1rem;
+  }
+}

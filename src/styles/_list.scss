@@ -1,0 +1,87 @@
+@import "./variables";
+@import "./mixin";
+
+.list {
+  width: 100%;
+  color: $color-text;
+
+  &--noti {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    color: $color-text;
+  }
+
+  &__title {
+    font-weight: 450;
+    text-transform: capitalize;
+    padding-left: 1rem;
+    font-size: 1.4rem;
+    color: $color-secondary-dark-1;
+  }
+
+  &__items {
+    margin-top: 1rem;
+    @include flexbox();
+    flex-direction: column;
+    row-gap: $row-gap-small;
+    justify-content: center;
+    align-items: center;
+
+    &--noti {
+      margin-top: 1rem;
+      @include flexbox();
+      flex-direction: column;
+      row-gap: $row-gap-small;
+    }
+  }
+
+  &__item {
+    position: relative;
+    width: 95%;
+
+    @include flexbox();
+    flex-direction: row;
+    text-align: center;
+    justify-content: start;
+    align-items: center;
+    column-gap: $column-gap;
+    border-radius: $border-radius-drawer;
+
+    padding: 1rem 1rem;
+
+    &--noselected {
+      animation: 0.1s ease 0s 1 normal forwards change-color-bg-secondary-out;
+      &-noti {
+        background-color: rgba($color-text, 0.05);
+        border-radius: $border-radius-drawer;
+        padding: 1rem;
+        @include flexbox();
+        flex-direction: row;
+        text-align: center;
+        justify-content: start;
+        align-items: center;
+        column-gap: $column-gap;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba($color-secondary, 0.3);
+          // animation: .8s ease 0s 1 normal forwards change-color-bg-secondary-in;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+        animation: 0.8s ease 0s 1 normal forwards change-color-bg-secondary-in;
+      }
+    }
+
+    &--selected {
+      background-color: rgba($color-secondary, .3);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
