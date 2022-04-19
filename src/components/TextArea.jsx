@@ -8,7 +8,7 @@ const TextArea = (props) => {
       <div className="textarea__wrapper">
         <textarea className="textarea__input" placeholder='Type a message...' ></textarea>
         <button className="button button--icon">
-          <IoMdSend className="icon icon--green-light icon--medium" />
+          <IoMdSend className="icon icon--green-light icon--large" />
         </button>
       </div>
     </div>
