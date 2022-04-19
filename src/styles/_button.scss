@@ -25,12 +25,13 @@
 
     padding: .8rem 2.4rem;
 
-    &:active{
-      @include neumorphic-inner();
-    }
+    
 
     &-dark{
       background-color: $color-primary-dark;
+      &:active{
+        @include neumorphic-inner();
+      }
     }
 
     &-light{
@@ -39,6 +40,10 @@
 
     &-secondary{
       background-color: $color-secondary-dark-1;
+
+      // &:active{
+      //   @include neumorphic-inner-secondary();
+      // }
     }
   }
 

@@ -61,6 +61,11 @@
     min-height: $avatar-size-small;
   }
 
+  &--mini{
+    width: $avatar-size-mini;
+    height: $avatar-size-mini;
+  }
+
   &--profile {
     position: absolute;
     top: 100%;
@@ -114,18 +119,20 @@
 
 .textarea {
   width: 100%;
-  height: 8rem;
+  height: 10rem;
 
-  padding: 1.5rem 0;
+  padding: 2rem 0;
   @include flexbox();
   justify-content: center;
   align-content: center;
-  background-color: transparent;
+  background-color: rgba($color-secondary-light,0);
+
+  // background: linear-gradient(rgba($color-primary-dark, 0), rgba($color-primary-dark, 1));
 
   animation: 0.8s ease 0s 1 normal forwards slide-in-bottom;
 
   &__wrapper {
-    width: 100%;
+    width: 94%;
     height: 100%;
 
     padding: 1rem 2.5rem 1rem 2.5rem;
@@ -136,8 +143,8 @@
     align-items: center;
     column-gap: $column-gap;
 
-    background-color: $color-primary-light;
-    @include boxshadow();
+    background-color: $color-primary-dark;
+    @include neumorphic();
     border-radius: 50px;
   }
 
@@ -363,5 +370,60 @@ textarea {
     &:hover{
       background-color: rgba($color-secondary-dark, 0.2);
     }
+  }
+}
+
+.message{
+
+  &__wrapper{
+    @include flexbox();
+    flex-direction: row;
+    gap:$column-gap-small;
+    align-items: flex-end;
+    padding: 0 1rem;
+
+    &--left{
+      justify-content: start;
+    }
+  
+    &--right{
+  justify-content: end;
+    }
+
+    &:last-child{
+      margin-bottom: 6rem !important;
+    }
+
+    &:first-child{
+      margin-top: 6rem !important;
+    }
+  }
+
+  &__avatar{
+    // height: 2rem;
+    // width: 2rem;
+    // background-color: aqua;
+  }
+
+  &__body{
+    display: table;
+  width: 30rem;
+  height: auto;
+  border-radius: $border-radius-drawer;
+  background-color: $color-primary-dark;
+  @include neumorphic();
+
+  padding: 1rem 1.1rem;
+  }
+
+  &__sender{
+    color:$color-secondary-dark;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+  }
+
+  &__body{
+    color:rgba($color-text,.8);
+    font-size: 1.2rem;
   }
 }

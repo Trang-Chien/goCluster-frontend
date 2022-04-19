@@ -23,9 +23,10 @@
 
   &__items {
     margin-top: 1rem;
+    // padding-left: 1rem;
     @include flexbox();
     flex-direction: column;
-    row-gap: $row-gap-small;
+    row-gap: $row-gap;
     justify-content: center;
     align-items: center;
 
@@ -39,7 +40,7 @@
 
   &__item {
     position: relative;
-    width: 95%;
+    width: 90%;
 
     @include flexbox();
     flex-direction: row;
@@ -48,11 +49,13 @@
     align-items: center;
     column-gap: $column-gap;
     border-radius: $border-radius-drawer;
+    background-color: $color-primary-dark;
 
     padding: 1rem 1rem;
 
     &--noselected {
-      animation: 0.1s ease 0s 1 normal forwards change-color-bg-secondary-out;
+      animation: 0.8s ease 0s 1 normal forwards change-color-bg-secondary-out;
+      // background-color: $color-primary-dark;
       &-noti {
         background-color: rgba($color-text, 0.05);
         border-radius: $border-radius-drawer;
@@ -66,8 +69,8 @@
 
         &:hover {
           cursor: pointer;
-          background-color: rgba($color-secondary, 0.3);
-          // animation: .8s ease 0s 1 normal forwards change-color-bg-secondary-in;
+          // background-color: rgba($color-secondary, 0.3);
+          animation: .8s ease 0s 1 normal forwards change-color-bg-secondary-in;
         }
       }
       &:hover {
@@ -77,7 +80,8 @@
     }
 
     &--selected {
-      background-color: rgba($color-secondary, .3);
+      // background-color: rgba($color-secondary, .3);
+      @include neumorphic();
 
       &:hover {
         cursor: pointer;

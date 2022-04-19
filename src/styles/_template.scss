@@ -26,8 +26,8 @@
     height: auto;
     background-color: $color-primary-dark;
     border-radius: $border-radius-drawer $border-radius-drawer 0 0;
-    // @include neumorphic();
-    box-shadow: 12px 12px 24px 0 rgba(0,0,0,.2) ;
+    @include boxshadow-header();
+    
     color: $color-text;
     font-size: 1.6rem;
 

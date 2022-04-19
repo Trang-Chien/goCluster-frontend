@@ -169,16 +169,16 @@
 
 @include change-color-animation(
   change-color-bg-secondary-in,
-  $color-primary,
-  rgba($color-primary-light,0.5) ,
+  $color-primary-dark,
+  rgba($color-primary-light,0.2) ,
   $color-secondary-light-2,
   $color-secondary-light-2
 );
 
 @include change-color-animation(
   change-color-bg-secondary-out,
-  rgba($color-primary-light,0.5) ,
-  $color-primary,
+  rgba($color-primary-light,0.2) ,
+  $color-primary-dark,
   $color-secondary-light-2,
   $color-secondary-light-2
 );

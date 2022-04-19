@@ -8,13 +8,12 @@
   min-width: $drawer-size;
   height: auto;
   height: 100vh;
-  background-color: $color-primary;
+  background-color: $color-primary-dark;
   transition: all 1.4s ease;
   overflow-y: scroll;
   scrollbar-width: none;
   z-index: 11;
-  @include boxshadow();
-  // @include neumorphic();
+  @include neumorphic();
 
   &::-webkit-scrollbar {
     display: none;
@@ -39,7 +38,8 @@
     padding: 1rem;
     @include flexbox();
     align-items: center;
-    background-color: transparent;
+    background-color: $color-primary-dark;
+    // @include boxshadow-header();
     
     z-index: 1;
 

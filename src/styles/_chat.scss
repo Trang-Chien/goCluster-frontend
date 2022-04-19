@@ -4,12 +4,27 @@
 
 .chat {
   &__wrapper {
-      width: 100%;
-      padding: 0 2rem;
-      transition: all 1.4s ease;
+    width: 100%;
+    transition: all 1.4s ease;
+    @include flexbox();
+    flex-direction: column;
+    align-items: center;
   }
 
-  &__body{
-      height: calc(100vh - 4rem - 8rem);
+  &__body {
+    height: calc(100vh - 4rem - 10rem);
+    width: 100%;
+    padding:0 3%;
+    @include flexbox();
+    flex-direction: column;
+    row-gap: $row-gap-medium;
+
+    overflow: auto;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    
   }
 }

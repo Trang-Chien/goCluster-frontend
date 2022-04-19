@@ -6,6 +6,9 @@
 .dropdown {
   position: relative;
   width: 100%;
+  @include flexbox();
+  justify-content: center;
+  align-items: center;
   font-family: inherit;
   font-size: 1.4rem;
   user-select: none;
@@ -13,22 +16,22 @@
   border-radius: 0 0 $border-radius-drawer $border-radius-drawer;
   animation: .8s ease 0s 1 normal forwards slide-in-top-dropdown;
 
-
   &__bar {
     position: relative;
     cursor: pointer;
-    width: 100%;
+    width: 94%;
     height: 4rem ;
     padding: 1rem 2rem;
     z-index: 10;
     border-radius: 0 0 $border-radius-drawer $border-radius-drawer;
     font-size: 1.4rem;
-    @include boxshadow();
+    @include neumorphic();
 
     @include flexbox();
     justify-content: space-between;
-    background-color: $color-primary;
+    background-color: $color-primary-dark;
     color: $color-text;
+    
   }
 
   &__default{
@@ -37,13 +40,12 @@
 
   &__options {
     position: absolute;
+    width: 94%;
     top: 2rem;
-    left: 0;
-    width: 100%;
+    left: 3%;
     padding-top: 2rem;
 
     transform: all .8s ease;
-    @include boxshadow();
     border-radius: 0 0 $border-radius-drawer $border-radius-drawer;
     background-color: $color-primary;
   }
