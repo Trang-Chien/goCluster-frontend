@@ -12,16 +12,15 @@ import {
   AddAdmin,
   AddOnwer,
   InvitePeople,
-  AlertLeaveServer
+  AlertLeaveServer,
+  CreateServer,
+  CreateChannel,
 } from "../components/UtilsForm";
 
 const servers = {
-  ReactJS: ["ReactJS channel 1", "ReactJS channel 2"],
-  "Gamming team": ["Gamming team channel 1", "Gamming team channel 2"],
-  "learning chinese": [
-    "learning chinese channel 1",
-    "learning chinese channel 2",
-  ],
+  ReactJS: ["Redux", "QnA"],
+  "foreigners in russia": ["st peterburgs", "mosscow"],
+  "learning languages": ["english", "chinese", "russian", "vietnamese"],
 };
 
 const friends = ["chien bui", "do thien", "nguyen ha"];
@@ -51,6 +50,8 @@ const HomePage = () => {
   const [openAddOwnerForm, setOpenAddOwnerForm] = useState(false);
   const [openCreateRoleForm, setOpenCreateRoleForm] = useState(false);
   const [openAlertLeaveServer, setOpenAlertLeaveServer] = useState(false);
+  const [openCreateServerForm, setOpenCreateServerForm] = useState(false);
+  const [openCreateChannelForm, setOpenCreateChannelForm] = useState(false);
 
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -58,11 +59,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // setFirstName(JSON.parse(localStorage.getItem("firstName")));
-    // setLastName(JSON.parse(localStorage.getItem("lastName")));
-    // setUsername(JSON.parse(localStorage.getItem("avatar")));
     if (!isLogin) navigate("/welcome");
-    // if (!isLoggin) setShowWelcomeForm(true);
   }, [isLogin, navigate]);
 
   const handleLeftDrawerStatus = (event) => {
@@ -105,12 +102,20 @@ const HomePage = () => {
     setOpenAddAdminForm(status);
   };
 
+  const onChangeOpenCreateChannelForm = (status) => {
+    setOpenCreateChannelForm(status);
+  };
+
+  const onChangeOpenCreateServerForm = (status) => {
+    setOpenCreateServerForm(status);
+  };
+
   const onChangeOpenAddOwnerForm = (status) => {
     setOpenAddOwnerForm(status);
   };
 
   const onChangeOpenALertLeaveServer = (status) => {
-    console.log(status)
+    console.log(status);
     setOpenAlertLeaveServer(status);
   };
 
@@ -173,7 +178,9 @@ const HomePage = () => {
       {openAlertLeaveServer ? (
         <React.Fragment>
           <div className="bg-blur"></div>
-          <AlertLeaveServer changeOpenAlertLeaveServer={onChangeOpenALertLeaveServer} />
+          <AlertLeaveServer
+            changeOpenAlertLeaveServer={onChangeOpenALertLeaveServer}
+          />
         </React.Fragment>
       ) : null}
 
@@ -198,22 +205,45 @@ const HomePage = () => {
         </React.Fragment>
       ) : null}
 
+      {openCreateChannelForm ? (
+        <React.Fragment>
+          <div className="bg-blur"></div>
+          <CreateChannel
+            changeOpenCreateChannelForm={onChangeOpenCreateChannelForm}
+          />
+        </React.Fragment>
+      ) : null}
+
+      {openCreateServerForm ? (
+        <React.Fragment>
+          <div className="bg-blur"></div>
+          <CreateServer
+            changeOpenCreateServerForm={onChangeOpenCreateServerForm}
+          />
+        </React.Fragment>
+      ) : null}
+
       {showLeftDrawer ? (
-        <DrawerLeft
-          status={handleLeftDrawerStatus}
-          servers={servers}
-          currServer={currServer}
-          changeCurrServer={onChangeCurrServer}
-          friends={friends}
-          currFriend={currFriend}
-          selectedFriend={onChangeCurrFriend}
-          openNotiList={openNotiList}
-          changeOpenNotiList={onChangeOpenNotiList}
-          openSettings={openSettings}
-          changeOpenSettings={onChangeOpenSettings}
-          openProfile={openProfile}
-          changeOpenProfile={onChangeOpenProfile}
-        />
+        <React.Fragment>
+          <DrawerLeft
+            status={handleLeftDrawerStatus}
+            servers={servers}
+            currServer={currServer}
+            rightDrawerType={rightDrawerType}
+            changeRightDrawerType={onChangeType}
+            changeCurrServer={onChangeCurrServer}
+            friends={friends}
+            currFriend={currFriend}
+            selectedFriend={onChangeCurrFriend}
+            openNotiList={openNotiList}
+            changeOpenNotiList={onChangeOpenNotiList}
+            openSettings={openSettings}
+            changeOpenSettings={onChangeOpenSettings}
+            openProfile={openProfile}
+            changeOpenProfile={onChangeOpenProfile}
+            changeOpenCreateServerForm={onChangeOpenCreateServerForm}
+          />
+        </React.Fragment>
       ) : null}
       {currServer || currFriend ? (
         isServer ? (
@@ -227,6 +257,7 @@ const HomePage = () => {
             channels={channels}
             currChannel={currChannel}
             changeChannel={onChangeCurrChannel}
+            openCreateChannelForm={onChangeOpenCreateChannelForm}
           />
         ) : (
           <MainFrame
@@ -236,25 +267,28 @@ const HomePage = () => {
             setDrawerLeft={handleLeftDrawerStatus}
             setDrawerRight={handleRightDrawerStatus}
             currFriend={currFriend}
+            changeDrawerRightType={onChangeType}
           />
         )
       ) : null}
 
       {showRightDrawer ? (
-        <DrawerRight
-          status={handleRightDrawerStatus}
-          type={rightDrawerType}
-          changeType={onChangeType}
-          isServer={isServer}
-          currFriend={currFriend}
-          openMore={openMore}
-          changeOpenMore={onChangeOpenMore}
-          changeOpenAddAdminForm={onChangeOpenAddAdminForm}
-          changeOpenAddOwnerForm={onChangeOpenAddOwnerForm}
-          changeOpenInvitePeopleForm={onChangeOpenInvitePeopleForm}
-          changeOpenCreateRoleForm={onChangeOpenCreateRoleForm}
-          changeOpenAlertLeaveServer={onChangeOpenALertLeaveServer}
-        />
+        <React.Fragment>
+          <DrawerRight
+            status={handleRightDrawerStatus}
+            type={rightDrawerType}
+            changeType={onChangeType}
+            isServer={isServer}
+            currFriend={currFriend}
+            openMore={openMore}
+            changeOpenMore={onChangeOpenMore}
+            changeOpenAddAdminForm={onChangeOpenAddAdminForm}
+            changeOpenAddOwnerForm={onChangeOpenAddOwnerForm}
+            changeOpenInvitePeopleForm={onChangeOpenInvitePeopleForm}
+            changeOpenCreateRoleForm={onChangeOpenCreateRoleForm}
+            changeOpenAlertLeaveServer={onChangeOpenALertLeaveServer}
+          />
+        </React.Fragment>
       ) : null}
     </div>
   );
