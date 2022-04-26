@@ -67,19 +67,34 @@
   }
 
   &--medium {
-    font-size: 1.6rem;
+    font-size: $size-icon-medium;
   }
 
   &--large{
-    font-size: 2.5rem;
+    font-size: $size-icon-large;
+  }
+
+  &--huge{
+    font-size: $size-icon-huge;
+    animation: .2s ease 0s 1 normal forwards shrink;
+    animation-delay: 5.2s;
   }
 
   &--close {
     font-size: 3rem;
     color: $color-secondary-dark;
     animation: 0.8s ease 0s 1 normal forwards scale-out;
+  }
 
-
+  &--cursor{
+    position: absolute;
+    color: black;
+    top: 20rem;
+    right: 30rem;
+    z-index: 10;
+    font-size: calc($size-icon-huge + 0.6rem);
+    animation: 1s ease 0s 1 normal forwards move-cursor;
+    animation-delay: 3.9s;
   }
 
   &--sun {

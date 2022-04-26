@@ -16,9 +16,12 @@
   &__title {
     font-weight: 450;
     text-transform: capitalize;
-    padding-left: 1rem;
+    padding:0 1rem;
     font-size: 1.4rem;
     color: $color-secondary-dark-1;
+
+    @include flexbox();
+    justify-content: space-between;
   }
 
   &__items {

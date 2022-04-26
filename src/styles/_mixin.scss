@@ -9,11 +9,15 @@
 }
 
 @mixin neumorphic(){
-  box-shadow: 12px 12px 24px 0 rgba(0,0,0,.2), -12px -12px 24px 0 rgba(255, 255, 255,.06)
+  box-shadow: 12px 12px 24px 0 rgba(0,0,0,.2), -12px -12px 24px 0 rgba(255, 255, 255,.04)
+}
+
+@mixin neumorphic-secondary(){
+  box-shadow: 12px 12px 24px 0 rgba($color-black,.15), -12px -12px 24px 0 rgba(255, 255, 255,.1)
 }
 
 @mixin neumorphic-inner(){
-  background: linear-gradient(140deg, rgba(0,0,0,0.08), rgba(255,255,255,0.04));
+  background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(255,255,255,0.06));
 }
 @mixin neumorphic-inner-secondary(){
   background: linear-gradient(140deg, rgba($color-secondary-dark,0.08), rgba(255,255,255,0.04));

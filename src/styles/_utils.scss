@@ -36,8 +36,11 @@
   @include flexbox();
   align-items: flex-start;
   flex-wrap: wrap;
-  // column-gap: $column-gap-small;
   font-size: 1.8rem;
+
+  &--neumorphic {
+    column-gap: $column-gap-small;
+  }
 }
 
 .avatar {
@@ -61,7 +64,7 @@
     min-height: $avatar-size-small;
   }
 
-  &--mini{
+  &--mini {
     width: $avatar-size-mini;
     height: $avatar-size-mini;
   }
@@ -125,21 +128,34 @@
   @include flexbox();
   justify-content: center;
   align-content: center;
-  background-color: rgba($color-secondary-light,0);
-
-  // background: linear-gradient(rgba($color-primary-dark, 0), rgba($color-primary-dark, 1));
+  background-color: rgba($color-secondary-light, 0);
 
   animation: 0.8s ease 0s 1 normal forwards slide-in-bottom;
 
+  &--welcome {
+    width: 80%;
+    height: 12rem;
+
+    padding: 2rem 0;
+    @include flexbox();
+    justify-content: center;
+    align-content: center;
+    background-color: rgba($color-secondary-light, 0);
+
+    animation: 0.8s ease 0s 1 normal forwards slide-in-bottom,
+      0.5s ease 5.2s 1 normal forwards fade-out;
+  }
+
   &__wrapper {
+    position: relative;
     width: 94%;
     height: 100%;
 
-    padding: 1rem 2.5rem 1rem 2.5rem;
+    padding: 1rem 2.5rem;
 
     @include flexbox();
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     column-gap: $column-gap;
 
@@ -150,7 +166,7 @@
 
   &__input {
     border: none;
-    width: calc(100% - 2.4rem);
+    width: calc(100% - $size-icon-large);
     min-height: 1.4rem;
     max-height: 100%;
     background-color: transparent;
@@ -180,6 +196,18 @@
       font-size: 1.2rem;
       letter-spacing: 0;
       font-weight: 300;
+    }
+
+    &--welcome {
+      text-align: center;
+      height: 3rem;
+      font-size: 1.7rem;
+
+      &::placeholder {
+        font-size: 1.7rem;
+        letter-spacing: 0;
+        font-weight: 300;
+      }
     }
   }
 }
@@ -255,7 +283,7 @@ textarea {
   width: 14rem;
   height: 7rem;
   background-color: $color-primary-dark;
-  @include neumorphic();
+
   color: $color-text;
   border-radius: $border-radius-drawer;
 
@@ -269,13 +297,19 @@ textarea {
 
   &--selected {
     background-color: $color-primary-dark;
-    @include boxshadow();
+    @include neumorphic();
+    @include neumorphic-inner();
   }
 
   &--noselected {
-    &:hover {
-      background-color: rgba($color-text, 0.15);
-    }
+    // &:hover {
+    //   background-color: rgba($color-text, 0.15);
+    // }
+    @include neumorphic();
+  }
+
+  &:active {
+    @include neumorphic-inner();
   }
 
   &__item {
@@ -314,6 +348,7 @@ textarea {
     height: 3rem;
     background-color: $color-primary-dark;
     border-radius: 100%;
+    @include neumorphic-inner();
 
     display: flex;
     justify-content: center;
@@ -365,65 +400,199 @@ textarea {
     background-color: rgba($color-text, 0.05);
     border-radius: $border-radius-drawer;
 
+    @include flexbox();
+    flex-direction: row;
+    column-gap: $column-gap-small;
+
     cursor: pointer;
 
-    &:hover{
+    &:hover {
       background-color: rgba($color-secondary-dark, 0.2);
     }
   }
 }
 
-.message{
-
-  &__wrapper{
+.message {
+  &__wrapper {
     @include flexbox();
     flex-direction: row;
-    gap:$column-gap-small;
+    gap: $column-gap-small;
     align-items: flex-end;
     padding: 0 1rem;
 
-    &--left{
+    &--left {
       justify-content: start;
     }
-  
-    &--right{
-  justify-content: end;
+
+    &--right {
+      justify-content: end;
     }
 
-    &:last-child{
+    &:last-child {
       margin-bottom: 6rem !important;
     }
 
-    &:first-child{
+    &:first-child {
       margin-top: 6rem !important;
     }
   }
 
-  &__avatar{
+  &__avatar {
     // height: 2rem;
     // width: 2rem;
     // background-color: aqua;
   }
 
-  &__body{
+  &__body {
     display: table;
-  width: 30rem;
-  height: auto;
-  border-radius: $border-radius-drawer;
-  background-color: $color-primary-dark;
-  @include neumorphic();
+    width: 30rem;
+    height: auto;
+    border-radius: $border-radius-drawer;
 
-  padding: 1rem 1.1rem;
+    padding: 1rem 1.1rem;
+
+    &--left {
+      @include neumorphic();
+      background-color: $color-primary-dark;
+    }
+
+    &--right {
+      background-color: $color-secondary-dark;
+      @include neumorphic-secondary();
+    }
   }
 
-  &__sender{
-    color:$color-secondary-dark;
+  &__sender {
+    color: $color-secondary-dark;
     font-size: 1.2rem;
     text-transform: capitalize;
   }
 
-  &__body{
-    color:rgba($color-text,.8);
+  &__body {
+    color: rgba($color-text, 0.8);
     font-size: 1.2rem;
   }
+}
+
+.typewrite {
+  &__content {
+    overflow: hidden;
+    width: 100%;
+    border-right: 0.1em solid $color-secondary-light-2;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 1rem;
+    font-size: 3rem;
+    color: $color-secondary-dark;
+    font-family: "Paytone One", sans-serif;
+    animation: typing 3.5s steps(17, end), blink-caret 0.5s step-end infinite;
+  }
+}
+
+.radio {
+  &__wrapper {
+    width: 70%;
+    background-color: transparent;
+    height: auto;
+    @include flexbox();
+    justify-content: start;
+    flex-direction: row;
+    column-gap: 20%;
+    margin-bottom: $margin-bottom-body-template;
+    cursor: pointer;
+  }
+
+  &__option {
+    @include flexbox();
+    justify-content: space-between;
+    flex-direction: row;
+    column-gap: $column-gap-small;
+  }
+  &__dot {
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0.2px transparent,
+      0 0 0 1.5px rgba($color-secondary-dark, 1);
+
+    &--selected {
+      background-color: rgba($color-secondary-dark, 1);
+      // @include neumorphic-secondary();
+    }
+
+    &--noselected {
+      background-color: rgba($color-primary-dark, 1);
+      // @include neumorphic();
+    }
+  }
+
+  &__content {
+    text-transform: capitalize;
+    font-size: 1.2rem;
+    color: $color-secondary-light-2;
+  }
+}
+
+.star {
+  border-radius: 50%;
+  background-color: transparent;
+
+  &__wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+  }
+
+  &__container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    filter: blur(8px);
+  -webkit-filter: blur(1px);
+  }
+
+  &--medium {
+    height: $size-star-medium;
+    width: $size-star-medium;
+    box-shadow: 
+    0 0 0 .4rem rgba($color-secondary-dark, 0.4),
+    0 0 0 .5rem rgba($color-secondary-dark, 0.2),
+    0 0 0 .6rem rgba($color-secondary-dark, 0.1),
+    0 0 0 .7rem rgba($color-secondary-dark, 0.05),
+    ;
+    animation: blink-star ease 8s normal infinite;
+  }
+
+  &--small {
+    height: $size-star-small;
+    width: $size-star-small;
+    box-shadow: 
+    0 0 0 .2rem rgba($color-secondary-dark, 0.5),
+    0 0 0 .3rem rgba($color-secondary-dark, 0.3),
+    0 0 0 .5rem rgba($color-secondary-dark, 0.1),
+    0 0 0 .6rem rgba($color-secondary-dark, 0.05),
+    ;
+    animation: blink-star ease 6s normal infinite;
+  }
+
+  &--large {
+    height: $size-star-large;
+    width: $size-star-large;
+    box-shadow: 
+    0 0 0 .3rem rgba($color-secondary-dark, 0.4),
+    0 0 0 .6rem rgba($color-secondary-dark, 0.3),
+    0 0 0 .9rem rgba($color-secondary-dark, 0.2),
+    0 0 0 1.1rem rgba($color-secondary-dark, 0.1),
+    ;
+    animation: blink-star ease 10s normal infinite;
+  }
+}
+
+.listmember {
+  width: 70%;
+  height: 10rem;
+  background-color: seashell;
 }

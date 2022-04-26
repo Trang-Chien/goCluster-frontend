@@ -50,6 +50,7 @@
 
   &__body{
       padding: 2rem;
+      padding-top: 3.5rem;
       width: auto;
       @include flexbox();
       justify-content: center;
@@ -60,6 +61,7 @@
       &--setting{
         padding: 2rem;
       width: auto;
+      height: auto;
       @include flexbox();
       justify-content: center;
       align-items: center;
@@ -73,6 +75,7 @@
   text-transform: capitalize;
   color: $color-text;
   font-weight: 500;
+  color: $color-secondary-dark;
   }
 
   &__text{

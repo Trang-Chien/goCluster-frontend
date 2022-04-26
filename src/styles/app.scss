@@ -1,88 +1,88 @@
-@import './variables';
-@import './form';
-@import './button';
-@import './animations';
-@import './input';
-@import './icon';
-@import './mixin';
-@import './drawer';
-@import './list';
-@import './utils';
-@import './home';
-@import './chat';
-@import './dropdown';
-@import './template';
+@import "./variables";
+@import "./form";
+@import "./button";
+@import "./animations";
+@import "./input";
+@import "./icon";
+@import "./mixin";
+@import "./drawer";
+@import "./list";
+@import "./utils";
+@import "./home";
+@import "./chat";
+@import "./dropdown";
+@import "./template";
+@import './bg';
 
 @media (max-width: 320px) {
-    html {
-      font-size: 25%;
-    }
+  html {
+    font-size: 25%;
   }
-  
-  @media (min-width: 320px) {
-    html {
-      font-size: 30%;
-    }
-  }
-  
-  @media (min-width: 480px) {
-    html {
-      font-size: 35%;
-    }
-  }
-  
-  @media (min-width: 600px) {
-    html {
-      font-size: 40%;
-    }
-  }
-  
-  @media (min-width: 801px) {
-    html {
-      font-size: 55%;
-    }
-  }
-  
-  @media (min-width: 1025px) {
-    html {
-      font-size: 62.5%;
-    }
-  }
-  
-  @media (min-width: 1281px) {
-    html {
-      font-size: 75%;
-    }
-  }
+}
 
+@media (min-width: 320px) {
+  html {
+    font-size: 30%;
+  }
+}
 
-body{
-    height: 100vh;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+@media (min-width: 480px) {
+  html {
+    font-size: 35%;
+  }
+}
 
-    // background-image: 
-    //     url('./bg-images/svg.png'),
-    //     url('./bg-images/svg-2.png'),
-    //     url('./bg-images/svg-4.png'),
-    //     url('./bg-images/sun.png')
-    // ;
-    // background-position:
-    //     bottom left,
-    //     bottom left, 
-    //     bottom left,
-    //     top 30% right 10%
-    // ; 
-    // background-size: 
-    //     100% 15%,
-    //     100% 40%,
-    //     100% 70%,
-    //     30% auto
-    // ;
-background-color: $color-primary-dark;
-    background-repeat: no-repeat;
-    backdrop-filter: blur(5px);
-    overflow: hidden;
+@media (min-width: 600px) {
+  html {
+    font-size: 40%;
+  }
+}
+
+@media (min-width: 801px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media (min-width: 1025px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media (min-width: 1281px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+body {
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+
+  // background-image:
+  //     url('./bg-images/svg.png'),
+  //     url('./bg-images/svg-2.png'),
+  //     url('./bg-images/svg-4.png'),
+  //     url('./bg-images/sun.png')
+  // ;
+  // background-position:
+  //     bottom left,
+  //     bottom left,
+  //     bottom left,
+  //     top 30% right 10%
+  // ;
+  // background-size:
+  //     100% 15%,
+  //     100% 40%,
+  //     100% 70%,
+  //     30% auto
+  // ;
+  background-color: $color-primary-dark;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(5px);
+  overflow: hidden;
 }
 
 *,
@@ -93,19 +93,7 @@ background-color: $color-primary-dark;
   box-sizing: inherit;
 }
 
-main{
-    min-height: 100vh;
+main {
+  min-height: 100vh;
 }
-
-.bg{
-    height: 100vh;
-    overflow: hidden;
-    
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-
-}
-
 

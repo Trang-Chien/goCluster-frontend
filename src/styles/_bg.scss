@@ -1,0 +1,63 @@
+@import './animations';
+@import './variables';
+@import './mixin';
+
+.bg {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  
+    &__content {
+      background-color: $color-secondary-dark;
+      @include neumorphic-secondary();
+      color: $color-secondary-light-2;
+      font-size: 3rem;
+      border-radius: $border-radius-drawer;
+      padding: 1rem 3rem;
+      // animation: 6.3s ease 0 1 normal forwards fade-in;
+    }
+  
+    &__message {
+      position: absolute;
+      right: calc(10% + 3rem);
+      width: 20rem;
+      height: 20rem;
+      background-color:aliceblue;
+      @include flexbox();
+      flex-direction: column;
+      // animation: 1s ease 0 1 normal forwards shrink;
+      // animation:6.3s ease 0 1 normal forwards fade-in;
+    }
+  
+    &__status{
+      color: $color-secondary-dark;
+      font-size: 1.6rem;
+      text-align: right;
+  
+      &-1{
+  
+      }
+  
+      &-2{
+  
+      }
+  
+      &-3{
+        animation: .4s ease 0s 1 normal forwards dissolve,
+      }
+    }
+  }
+
+  // .test{
+  //   position: absolute;
+  //   width: 30rem;
+  //   height: 30rem;
+  //   background-color: aliceblue;
+  //   animation: 1s ease 0s 1 normal forwards slide-in-top,
+  // }
+  
