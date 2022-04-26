@@ -29,7 +29,7 @@ const LoginForm = ({ logined, back }) => {
         </div>
 
         <button
-          className="button button--text button--1"
+          className="button button--text button--light"
           onClick={(event) => logined(event)}
         >
           login

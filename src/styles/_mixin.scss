@@ -8,8 +8,28 @@
   display: flex;
 }
 
+@mixin blob {
+}
+
 @mixin neumorphic(){
-  box-shadow: 12px 12px 24px 0 rgba(0,0,0,.2), -12px -12px 24px 0 rgba(255, 255, 255,.04)
+  border-radius: $border-radius-drawer;
+background: $color-primary-dark;
+box-shadow:  11px 11px 22px #26263d,
+             -11px -11px 22px #383859;
+}
+
+@mixin neumorphic-primary(){
+  border-radius: $border-radius-drawer;
+background: $color-primary;
+box-shadow:  5px 5px 22px #353552,
+             -5px -5px 22px #51517e;
+}
+
+@mixin neumorphic-primary-inset(){
+  border-radius: $border-radius-drawer;
+background: linear-gradient(145deg, #3c3c5e, #48486f);
+box-shadow:  5px 5px 10px #363653,
+             -5px -5px 10px #50507d;
 }
 
 @mixin neumorphic-secondary(){
@@ -17,7 +37,10 @@
 }
 
 @mixin neumorphic-inner(){
-  background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(255,255,255,0.06));
+  border-radius: $border-radius-drawer;
+background: $color-primary-dark;
+box-shadow: inset 11px 11px 22px #26263d,
+            inset -11px -11px 22px #383859;
 }
 @mixin neumorphic-inner-secondary(){
   background: linear-gradient(140deg, rgba($color-secondary-dark,0.08), rgba(255,255,255,0.04));

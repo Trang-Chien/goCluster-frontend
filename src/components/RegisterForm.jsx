@@ -33,7 +33,7 @@ const RegisterForm = ({ registered, back, setData }) => {
         </div>
 
         <button
-          className="button button--text button--1"
+          className="button button--text button--light"
           onClick={(event) => {console.log(username);registered(event); setData(firstname)}}
         >
           register

@@ -15,7 +15,8 @@
     padding: 4.1rem 6.8rem 6.2rem 6.8rem;
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
-
+  // border-radius: 42% 56% 72% 28% / 42% 42% 56% 48%;
+  //   animation: morph 3.75s linear infinite;
     @include boxshadow();
 
     &--1 {

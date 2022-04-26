@@ -534,7 +534,7 @@ textarea {
 }
 
 .star {
-  border-radius: 50%;
+  // border-radius: 50%;
   background-color: transparent;
 
   &__wrapper {
@@ -551,7 +551,7 @@ textarea {
     width: 100%;
     height: 100%;
     filter: blur(8px);
-  -webkit-filter: blur(1px);
+  -webkit-filter: blur(8px);
   }
 
   &--medium {
@@ -589,6 +589,42 @@ textarea {
     ;
     animation: blink-star ease 10s normal infinite;
   }
+}
+
+.blank{
+
+  &__wrapper{
+    width: 100%;
+    height: 100%;
+    @include flexbox();
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__title{
+    margin-top: 4rem;
+    font-size: 2rem;
+    font-weight: 500;
+    color: $color-secondary-dark;
+  }
+
+  &__content{
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 200;
+    color: $color-secondary-light-2;
+  }
+}
+
+.blob{
+  overflow: hidden;
+  width: 25rem;
+  height: 25rem;
+  border-radius: 42% 56% 72% 28% / 42% 42% 56% 48%;
+  animation: morph 3.75s linear infinite;
+  @include neumorphic-inner();
 }
 
 .listmember {

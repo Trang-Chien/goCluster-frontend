@@ -12,13 +12,13 @@ const WelcomeForm = ({ choice }) => {
 
         <div className='form__options'>
           <button
-            className="button button--text button--1"
+            className="button button--text button--light"
             onClick={() => choice("login")}
           >
             login
           </button>
           <button
-            className="button button--text button--1"
+            className="button button--text button--light"
             onClick={() => choice("register")}
           >
             register

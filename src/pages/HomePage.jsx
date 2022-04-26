@@ -7,6 +7,7 @@ import DrawerRight from "../components/DrawerRight";
 import Notifications from "../components/Notifications";
 import Settings from "../components/Settings";
 import Profile from "../components/Profile";
+import Blank from '../components/Blank';
 import {
   CreateRole,
   AddAdmin,
@@ -63,7 +64,9 @@ const HomePage = () => {
   }, [isLogin, navigate]);
 
   const handleLeftDrawerStatus = (event) => {
-    setShowLeftDrawer(!showLeftDrawer);
+    if (currServer===null && currFriend===null)
+    setShowLeftDrawer(true);
+    else setShowLeftDrawer(!showLeftDrawer);
   };
 
   const handleRightDrawerStatus = (event) => {
@@ -270,7 +273,7 @@ const HomePage = () => {
             changeDrawerRightType={onChangeType}
           />
         )
-      ) : null}
+      ) : <Blank />}
 
       {showRightDrawer ? (
         <React.Fragment>
