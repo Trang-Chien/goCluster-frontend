@@ -1,6 +1,6 @@
 import React from "react";
 
-const Message = ({ sender }) => {
+const Message = ({ changeDrawerRightType, changeDrawerRightStatus, sender }) => {
   return (
     <div
       className={`message__wrapper ${
@@ -14,18 +14,18 @@ const Message = ({ sender }) => {
           <img
               alt="avatar"
               className="avatar avatar--mini"
-              src={`https://api.multiavatar.com/${sender}.png`}
+              src={`https://api.multiavatar.com/${sender}.png`} onClick={()=> {changeDrawerRightStatus(true); changeDrawerRightType('profile')}}
             />
         </div>
       ) : null}
 
-      <div className="message__body">
+      <div className={`message__body ${sender !== "chien bui"?'message__body--left':'message__body--right'}`}y >
         {sender !== "chien bui" ? (
           <div className="message__header">
             <div className="message__sender">{sender}</div>
           </div>
         ) : null}
-        <div className="message__content">this is message of {sender}</div>
+        <div className="message__content">this is {sender}</div>
       </div>
     </div>
   );

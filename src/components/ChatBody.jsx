@@ -2,21 +2,21 @@ import React from 'react';
 
 import Message from './Message';
 
-const ChatBody=(props)=> {
+const ChatBody=({changeDrawerRightType, changeDrawerRightStatus})=> {
     return (
         <div className='chat__body'>
-            <Message sender='do thien'/>
-            <Message sender='chien bui'/>
-            <Message sender='nguyen ha'/>
-            <Message sender='trang nguyen'/>
-            <Message sender='do thien'/>
-            <Message sender='chien bui'/>
-            <Message sender='nguyen ha'/>
-            <Message sender='trang nguyen'/>
-            <Message sender='do thien'/>
-            <Message sender='chien bui'/>
-            <Message sender='nguyen ha'/>
-            <Message sender='trang nguyen'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='do thien'/>
+            <Message changeDrawerRightType={changeDrawerRightType} sender='chien bui'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='nguyen ha'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='trang nguyen'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='do thien'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='chien bui'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='nguyen ha'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='trang nguyen'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='do thien'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='chien bui'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='nguyen ha'/>
+            <Message changeDrawerRightType={changeDrawerRightType} changeDrawerRightStatus={changeDrawerRightStatus} sender='trang nguyen'/>
         </div>
     );
 }

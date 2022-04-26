@@ -41,8 +41,8 @@ const DrawerRight = ({
   const renderedMembers = (group) => {
     return (
       <React.Fragment>
-        <div className="list__items">
-          <div className="list__item" onClick={() => changeType("profile")}>
+        <div className="list__items ">
+          <div className="list__item list__item--noselected" onClick={() => changeType("profile", '')}>
             <div className="avatar avatar--medium"></div>
             <div className="item__title">server 2</div>
           </div>
@@ -159,12 +159,12 @@ const DrawerRight = ({
             </div>
             <div className="line" />
             {isServer ? (
-              <div className="profile__part">
-                <div className="profile__detail">
+              <div className="list__items">
+                <div className="list__item list__item--noselected">
                   <RiUserSettingsLine className="icon icon--green" />
                   <div className="item item__title">group 1 leader</div>
                 </div>
-                <div className="profile__detail">
+                <div className="list__item list__item--noselected">
                   <BiMessageRoundedDots className="icon icon--green" />
                   <div className="item item__title">message</div>
                 </div>

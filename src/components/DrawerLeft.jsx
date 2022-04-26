@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 import { AiOutlineDoubleLeft, AiFillSetting } from "react-icons/ai";
+import { HiPlus } from "react-icons/hi";
 import { GoBell } from "react-icons/go";
 
 import Notifications from "./Notifications";
@@ -9,6 +10,8 @@ const DrawerLeft = ({
   status,
   servers,
   currServer,
+  // rightDrawerType,
+  changeRightDrawerType,
   changeCurrServer,
   friends,
   currFriend,
@@ -17,8 +20,9 @@ const DrawerLeft = ({
   changeOpenNotiList,
   openSettings,
   changeOpenSettings,
-  openProfile,
+  // openProfile,
   changeOpenProfile,
+  changeOpenCreateServerForm,
 }) => {
   const ref = useRef();
 
@@ -50,6 +54,7 @@ const DrawerLeft = ({
             onClick={() => {
               console.log(`selected ${key}`);
               changeCurrServer(key);
+              changeRightDrawerType("list")
             }}
           >
             <img
@@ -134,7 +139,10 @@ const DrawerLeft = ({
           </div>
         </div>
         <div className="drawer__body">
-          <button className="button button--circle" onClick={() => changeOpenProfile(true)}>
+          <button
+            className="button button--circle"
+            onClick={() => changeOpenProfile(true)}
+          >
             <img
               alt="avatar"
               className="avatar avatar--large"
@@ -143,7 +151,14 @@ const DrawerLeft = ({
           </button>
 
           <div className="list">
-            <div className="list__title">server</div>
+            <div className="list__title">
+              server
+              <button className="button button--icon" onClick={()=>{
+                changeOpenCreateServerForm(true)
+              }}>
+                <HiPlus className="icon icon--small" />
+              </button>
+            </div>
             <div className="line" />
             <div className="list__items">{renderedServers()}</div>
           </div>

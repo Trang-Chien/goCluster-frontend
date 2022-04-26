@@ -5,6 +5,7 @@ import { IoIosClose, IoIosSunny } from "react-icons/io";
 import { MdDarkMode } from "react-icons/md";
 
 const Settings = ({ openSettings, changeOpenSettings }) => {
+  
   return (
     <div className="template__wrapper">
       <div className="template__header">
@@ -12,7 +13,6 @@ const Settings = ({ openSettings, changeOpenSettings }) => {
         <button
           className="button button--icon button--close"
           onClick={() => {
-            //   console.log('click close button!')
             changeOpenSettings(false);
           }}
         >

@@ -42,7 +42,7 @@ const Notifications = ({ changeOpenNotiList, OpenNotiList }) => {
       return (
         <React.Fragment>
           <div
-            className="list__item--noselected-noti"
+            className="more__option"
             key={id}
             onClick={() => {
               changeOpenNotiList(!OpenNotiList);
@@ -67,7 +67,7 @@ const Notifications = ({ changeOpenNotiList, OpenNotiList }) => {
   return (
     <div className="noti__wrapper">
       <div className="list--noti">
-        <div className="list__items--noti">{renderedNotis()}</div>
+        <div className="more__options">{renderedNotis()}</div>
       </div>
     </div>
   );

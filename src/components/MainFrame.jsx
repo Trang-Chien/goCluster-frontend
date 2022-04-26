@@ -15,6 +15,8 @@ const MainFrame = ({
   currChannel,
   changeChannel,
   currFriend,
+  changeDrawerRightType,
+  openCreateChannelForm
 }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
@@ -49,6 +51,7 @@ const MainFrame = ({
           drawerRightStatus={drawerRight}
           changeDrawerLeftStatus={onChangeDrawerLeftStatus}
           changeDrawerRightStatus={onChangeDrawerRightStatus}
+          openCreateChannelForm={openCreateChannelForm}
         />
       ) : (
         <Dropdown
@@ -61,7 +64,7 @@ const MainFrame = ({
         />
       )}
 
-      <ChatBody />
+      <ChatBody changeDrawerRightStatus={onChangeDrawerRightStatus} changeDrawerRightType={changeDrawerRightType} />
 
       <TextArea />
     </div>
