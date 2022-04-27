@@ -12,11 +12,12 @@ const WelcomePage = (props) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [showWelcomeForm, setShowWelcomeForm] = useState(true);
-  const navigate = useNavigate();
   const [showForms, setShowForms] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (isLoggined) navigate("/");
+    if (isLoggined) navigate("/home");
     if (!isLoggined) setShowWelcomeForm(true);
     const timer = setTimeout(() => setShowForms(true), 6500);
     return () => clearTimeout(timer);
