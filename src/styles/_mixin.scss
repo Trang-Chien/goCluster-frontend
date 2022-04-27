@@ -18,6 +18,13 @@ box-shadow:  11px 11px 22px #26263d,
              -11px -11px 22px #383859;
 }
 
+@mixin neumorphic-inset(){
+  border-radius: $border-radius-drawer;
+background: $color-primary-dark;
+box-shadow:  11px 11px 22px #26263d,
+             -11px -11px 22px #383859;
+}
+
 @mixin neumorphic-primary(){
   border-radius: $border-radius-drawer;
 background: $color-primary;

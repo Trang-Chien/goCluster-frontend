@@ -40,9 +40,7 @@ const WelcomePage = (props) => {
     setIsLoggined(true);
   };
 
-  const onRegister = (event) => {
-    event.preventDefault();
-
+  const onRegister = () => {
     setShowLoginForm(false);
     setShowRegisterForm(false);
     setShowWelcomeForm(false);
@@ -56,17 +54,6 @@ const WelcomePage = (props) => {
     setShowRegisterForm(false);
     setShowWelcomeForm(true);
     setIsLoggined(false);
-  };
-
-  const setData = (firstName, lastName, username) => {
-    console.log("set data works");
-    localStorage.setItem("firstName", JSON.stringify(firstName));
-    localStorage.setItem("lastName", JSON.stringify(lastName));
-    localStorage.setItem("username", JSON.stringify(username));
-    localStorage.setItem(
-      "avatar",
-      JSON.stringify(`${process.env.API_AVATAR}${username}`)
-    );
   };
 
   return (
@@ -87,7 +74,7 @@ const WelcomePage = (props) => {
             <RegisterForm
               registered={onRegister}
               back={onBack}
-              setDate={setData}
+              // setDate={setData}
             />
           ) : null}
         </React.Fragment>

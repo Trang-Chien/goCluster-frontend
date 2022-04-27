@@ -18,7 +18,7 @@
   color: $color-text;
 
   &::placeholder {
-    color: $color-secondary-light-2;
+    color: rgba($color-secondary-light-2,.2);
     font-size: 1.2rem;
     letter-spacing: 0;
     font-weight: 300;

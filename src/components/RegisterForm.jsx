@@ -1,10 +1,47 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { RiArrowGoBackLine } from "react-icons/ri";
 
-const RegisterForm = ({ registered, back, setData }) => {
-  const [firstname, setFirstName]=useState('')
-  const [lastname, setLastName]=useState('');
-  const [username, SetUsername]=useState('');
+//ADD URL HERE!!!!!
+const LOGIN_URL = "";
+const REGISTER_URL = "";
+
+const RegisterForm = ({ registered, back }) => {
+  const [username, setUsername] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [confirmPwd, setConfirmPwd] = useState("");
+  const [error, setError] = useState(null);
+
+  const submit = async (e) => {
+    e.preventDefault();
+
+    if (username === "" || pwd === "" || confirmPwd === "") {
+      setError("Not all fields have been entered !");
+      return;
+    }
+
+    if (pwd !== confirmPwd) {
+      setError("Enter the same password twice for verification.");
+      return;
+    }
+
+    try {
+      const newUser = {
+        username,
+        pwd,
+      };
+
+      await axios.post(LOGIN_URL, newUser);
+      const loginRes = await axios.post(REGISTER_URL, { username, pwd });
+
+      localStorage.setItem("auth-token", loginRes.data.token);
+      setError(null);
+
+      registered();
+    } catch (err) {
+      err.response.data.msg && setError(err.response.data.msg);
+    }
+  };
 
   return (
     <div className="form__wrapper form__wrapper--2">
@@ -23,18 +60,42 @@ const RegisterForm = ({ registered, back, setData }) => {
         </div>
 
         <div className="input__wrapper">
-          <div className="input__item">
+          {/* <div className="input__item">
             <input className="input input--small" placeholder="first name" onChange={(e)=>setFirstName(e.target.value)}></input>
             <input className="input input--small" placeholder="last name" onChange={(e)=>setLastName(e.target.value)}></input>
-          </div>
-          <input className="input input--medium" placeholder="username" onChange={(e)=>SetUsername(e.target.value)}></input>
-          <input className="input input--medium" placeholder="password" type='password'></input>
-          <input className="input input--medium" placeholder="confirm password" type='password'></input>
+          </div> */}
+          <input
+            id="username"
+            className="input input--medium"
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          ></input>
+          <input
+            id="pwd"
+            className="input input--medium"
+            placeholder="password"
+            type="password"
+            onChange={(e) => setPwd(e.target.value)}
+          ></input>
+          <input
+            id="confirm-pwd"
+            className="input input--medium"
+            placeholder="confirm password"
+            type="password"
+            onChange={(e) => setConfirmPwd(e.target.value)}
+          ></input>
         </div>
+
+        {error!==null? <div className='error'>{error}</div>:null }
 
         <button
           className="button button--text button--light"
-          onClick={(event) => {console.log(username);registered(event); setData(firstname)}}
+          onClick={(event) => {
+            submit(event);
+            // console.log(username);
+            //
+            // setData(firstname);
+          }}
         >
           register
         </button>

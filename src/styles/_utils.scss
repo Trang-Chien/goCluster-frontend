@@ -1,6 +1,10 @@
 @import "./variables";
 @import "./mixin";
 
+.error{
+  color: $color-error;
+}
+
 .line {
   border: 0;
   height: 0.1rem;
