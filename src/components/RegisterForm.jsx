@@ -1,10 +1,8 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { RiArrowGoBackLine } from "react-icons/ri";
 
-//ADD URL HERE!!!!!
-const LOGIN_URL = "";
-const REGISTER_URL = "";
+import ChatContext from "../context/ChatContext";
 
 const RegisterForm = ({ registered, back }) => {
   const [username, setUsername] = useState("");
@@ -12,7 +10,10 @@ const RegisterForm = ({ registered, back }) => {
   const [confirmPwd, setConfirmPwd] = useState("");
   const [error, setError] = useState(null);
 
+  const { setUserData } = useContext(ChatContext);
+
   const submit = async (e) => {
+    
     e.preventDefault();
 
     if (username === "" || pwd === "" || confirmPwd === "") {
@@ -31,8 +32,16 @@ const RegisterForm = ({ registered, back }) => {
         pwd,
       };
 
-      await axios.post(LOGIN_URL, newUser);
-      const loginRes = await axios.post(REGISTER_URL, { username, pwd });
+      await axios.post(`${process.env.MAIN_API}/register`, newUser);
+      const loginRes = await axios.post(`${process.env.REACT_APP_API}/login`, {
+        username,
+        pwd,
+      });
+
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
 
       localStorage.setItem("auth-token", loginRes.data.token);
       setError(null);
@@ -60,10 +69,6 @@ const RegisterForm = ({ registered, back }) => {
         </div>
 
         <div className="input__wrapper">
-          {/* <div className="input__item">
-            <input className="input input--small" placeholder="first name" onChange={(e)=>setFirstName(e.target.value)}></input>
-            <input className="input input--small" placeholder="last name" onChange={(e)=>setLastName(e.target.value)}></input>
-          </div> */}
           <input
             id="username"
             className="input input--medium"
@@ -86,15 +91,12 @@ const RegisterForm = ({ registered, back }) => {
           ></input>
         </div>
 
-        {error!==null? <div className='error'>{error}</div>:null }
+        {error !== null ? <div className="error">{error}</div> : null}
 
         <button
           className="button button--text button--light"
           onClick={(event) => {
             submit(event);
-            // console.log(username);
-            //
-            // setData(firstname);
           }}
         >
           register

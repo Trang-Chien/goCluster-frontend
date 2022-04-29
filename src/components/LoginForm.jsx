@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 
 import { RiArrowGoBackLine } from "react-icons/ri";
 
-const REGISTER_URL = "";
+import ChatContext from "../context/ChatContext";
 
 const LoginForm = ({ logined, back }) => {
   const [username, setUsername] = useState("");
   const [pwd, setPwd] = useState("");
   const [error, setError] = useState(null);
+
+  const {setUserData}=useContext(ChatContext);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -19,7 +21,11 @@ const LoginForm = ({ logined, back }) => {
     }
 
     try {
-      const loginRes = await axios.post(REGISTER_URL, { username, pwd });
+      const loginRes = await axios.post(`${process.env.REACT_APP_API}/login`, { username, pwd });
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
 
       localStorage.setItem("auth-token", loginRes.data.token);
       setError(null);

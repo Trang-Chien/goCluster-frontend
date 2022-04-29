@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import { BiLogOut } from "react-icons/bi";
 
 import { IoIosClose } from "react-icons/io";
 
-const Profile = ({ openProfile, changeOpenProfile, changeIsLogin }) => {
+import ChatContext from "../context/ChatContext";
+
+const Profile = ({ changeOpenProfile, changeIsLogin }) => {
+  const {userData, setUserData } = useContext(ChatContext);
+
+  const logout = () => {
+    setUserData({
+      token: undefined,
+      user: undefined,
+    });
+    localStorage.setItem(process.env.REACT_APP_AUTH_TOKEN, "");
+    changeIsLogin(false);
+  };
+
   const renderedBoxItem = (title, detail, number) => {
     return (
       <div className="box-item box-item--noselected">
@@ -31,7 +45,7 @@ const Profile = ({ openProfile, changeOpenProfile, changeIsLogin }) => {
         <img
           alt="avatar"
           className="avatar avatar--large avatar--profile"
-          src={`https://api.multiavatar.com/chienbui.png`}
+          src={`${process.env.REACT_APP_API_AVATAR}/${userData.username}.png`}
         />
       </div>
       <div className="profile__name template__username">Bui Hong Chien</div>
@@ -39,21 +53,23 @@ const Profile = ({ openProfile, changeOpenProfile, changeIsLogin }) => {
 
       <div className="template__body">
         <div className="box-item__item">
-          {renderedBoxItem("roles", "your roles", "3")}
+          {renderedBoxItem("roles", "your roles", `${userData.role.length}`)}
           {renderedBoxItem("roles", "your roles", "3")}
           {renderedBoxItem("server", "serveres you are in", "2")}
           {renderedBoxItem("owner", "servered you created", "1")}
         </div>
       </div>
 
-      <div className='template__footer'>
-      <button
+      <div className="template__footer">
+        <button
           className="button button--text button--text-secondary"
-          onClick={() => {
-            changeIsLogin(false);
+          onClick={(e) => {
+            logout(e);
           }}
-        >logout
-        </button></div>
+        >
+          logout
+        </button>
+      </div>
     </div>
   );
 };
