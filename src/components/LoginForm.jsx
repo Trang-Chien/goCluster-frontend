@@ -10,7 +10,7 @@ const LoginForm = ({ logined, back }) => {
   const [pwd, setPwd] = useState("");
   const [error, setError] = useState(null);
 
-  const {setUserData}=useContext(ChatContext);
+  const { setUserData } = useContext(ChatContext);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -21,7 +21,10 @@ const LoginForm = ({ logined, back }) => {
     }
 
     try {
-      const loginRes = await axios.post(`${process.env.REACT_APP_API}/login`, { username, pwd });
+      const loginRes = await axios.post(`${process.env.REACT_APP_API}/login`, {
+        username,
+        pwd,
+      });
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,
