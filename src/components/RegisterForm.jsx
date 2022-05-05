@@ -3,6 +3,8 @@ import React, { useContext, useState } from "react";
 import { RiArrowGoBackLine } from "react-icons/ri";
 
 import ChatContext from "../context/ChatContext";
+import {loginRoute, registerRoute} from '../utils/APIRoutes';
+
 
 const RegisterForm = ({ registered, back }) => {
   const [username, setUsername] = useState("");
@@ -10,7 +12,8 @@ const RegisterForm = ({ registered, back }) => {
   const [confirmPwd, setConfirmPwd] = useState("");
   const [error, setError] = useState(null);
 
-  const { setUserData } = useContext(ChatContext);
+  const { user } = useContext(ChatContext);
+  const [userData, setUserData]=user;
 
   const submit = async (e) => {
     
@@ -32,20 +35,16 @@ const RegisterForm = ({ registered, back }) => {
         pwd,
       };
 
-      await axios.post(`${process.env.MAIN_API}/register`, newUser);
-      const loginRes = await axios.post(`${process.env.REACT_APP_API}/login`, {
+      await axios.post(registerRoute, newUser);
+      const loginRes = await axios.post(loginRoute, {
         username,
         pwd,
       });
 
-      setUserData({
-        token: loginRes.data.token,
-        user: loginRes.data.user,
-      });
+      setUserData(loginRes.data.user,
+      );
 
-      localStorage.setItem("auth-token", loginRes.data.token);
       setError(null);
-
       registered();
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);

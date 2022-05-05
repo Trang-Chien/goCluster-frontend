@@ -4,15 +4,17 @@ import axios from "axios";
 import { RiArrowGoBackLine } from "react-icons/ri";
 
 import ChatContext from "../context/ChatContext";
+import {loginRoute} from '../utils/APIRoutes';
 
 const LoginForm = ({ logined, back }) => {
   const [username, setUsername] = useState("");
   const [pwd, setPwd] = useState("");
   const [error, setError] = useState(null);
 
-  const { setUserData } = useContext(ChatContext);
+  const { user} = useContext(ChatContext);
+  const [userData, setUserData]=user;
 
-  const submit = async (e) => {
+  const submit = async (e) => { 
     e.preventDefault();
 
     if (username === "" || pwd === "") {
@@ -21,16 +23,13 @@ const LoginForm = ({ logined, back }) => {
     }
 
     try {
-      const loginRes = await axios.post(`${process.env.REACT_APP_API}/login`, {
+      const loginRes = await axios.post(loginRoute, {
         username,
         pwd,
       });
-      setUserData({
-        token: loginRes.data.token,
-        user: loginRes.data.user,
-      });
+      setUserData(loginRes.data.user,
+      );
 
-      localStorage.setItem("auth-token", loginRes.data.token);
       setError(null);
       logined();
     } catch (err) {
