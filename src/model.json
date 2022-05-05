@@ -32,7 +32,7 @@ Channel = {
         "participant": array[user_id],
         "member_count": int,
         "is_private": bool,
-        "last_message_create_at": datetime,
+        "last_message": Channel_message,
         "message": array[channel_message_id]
 }
     
@@ -40,7 +40,7 @@ Channel = {
 Personal_chat = {
 	"chat_id": "",
 	"participant": array[user_id],
-	"last_message_create_at": datetime,
+	"last_message": Direct_message,
 	"message": array[direct_message_id]
 }
 
