@@ -1,0 +1,65 @@
+\
+
+User = {
+    "user_id": "",
+    "username": "",
+    "role": array[role_id],
+    "workspace": array[workspace_id],
+    "personal_chat": array[chat_id],
+    "is_online": bool
+    }
+    
+Role = {
+    "role_id": "",
+    "role_name": "",
+    "permission": array[],
+}
+    
+Workspace = {
+    "workspace_id": "",
+    "workspace_name": "",
+    "channel": array[channel_id],
+    "owner": array[user_id],
+    "member": array[user_id],
+    "member_count": int,
+}
+    
+Channel = {
+        "channel_id": "",
+        "channel_name": "",
+        "workspace_id": workspace_id,
+        "admin": array[user_id],
+        "participant": array[user_id],
+        "member_count": int,
+        "is_private": bool,
+        "last_message_create_at": datetime,
+        "message": array[channel_message_id]
+}
+    
+
+Personal_chat = {
+	"chat_id": "",
+	"participant": array[user_id],
+	"last_message_create_at": datetime,
+	"message": array[direct_message_id]
+}
+
+Direct_message = {
+    "direct_message_id": "",
+    "sender_id:" user_id,
+    "recipient_id": user_id,
+    "content": "",
+    "sent_at": datetime
+}
+
+Channel_message = {
+    "channel_message_id": "",
+    "channel_id": channel_id,
+    "sender_id": user_id,
+    "mention_user": array[user_id],
+    "memtion_role": array[role_id],
+    "memtion_everyone": bool,
+    "pinned": bool,
+    "content": "",
+    "sent_at": datetime
+}
