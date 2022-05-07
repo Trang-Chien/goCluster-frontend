@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext, useState } from "react";
 
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
@@ -7,6 +7,9 @@ import { BiMessageRoundedDots } from "react-icons/bi";
 import { RiUserSettingsLine } from "react-icons/ri";
 
 import More from "./More";
+import ChatContext from "../context/ChatContext";
+import { createDirectMessageRoute } from "../utils/APIRoutes";
+import axios from "axios";
 
 const DrawerRight = ({
   status,
@@ -14,15 +17,20 @@ const DrawerRight = ({
   changeType,
   isServer,
   currFriend,
+  changeCurrFriend,
+  currServer,
   openMore,
   changeOpenMore,
   changeOpenAddAdminForm,
   changeOpenAddOwnerForm,
   changeOpenInvitePeopleForm,
   changeOpenCreateRoleForm,
-  changeOpenALertLeaveServer
+  changeOpenALertLeaveServer,
 }) => {
   const ref = useRef();
+  const { userData, directmsg } = useContext(ChatContext);
+  const [directMessage, setDirectMessage] = directmsg;
+  const [profileMember, setProfileMember] = useState(null);
 
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
@@ -38,26 +46,45 @@ const DrawerRight = ({
     };
   }, [openMore, changeOpenMore]);
 
+  const openDirectMessage = async (e) => {
+    e.preventDefault();
+    let isDirectMsgExist = directMessage.find(
+      (e) => e.participant.user_id === profileMember.user_id
+    );
+    if (isDirectMsgExist) changeCurrFriend(profileMember);
+    if (!isDirectMsgExist) {
+      const postNewDirectMessageRes = await axios.post(createDirectMessageRoute, {participant: [userData.user, profileMember] });
+      setDirectMessage({...directMessage, ...postNewDirectMessageRes.data.personalChat})
+    }
+    changeCurrFriend(profileMember)
+  };
+
   const renderedMembers = (group) => {
     return (
-      <React.Fragment>
-        <div className="list__items ">
-          <div className="list__item list__item--noselected" onClick={() => changeType("profile", '')}>
-            <div className="avatar avatar--medium"></div>
-            <div className="item__title">server 2</div>
+      <div className="list__items ">
+        {currServer.member.map((m) => (
+          <div
+            className="list__item list__item--noselected"
+            key={m.user_id}
+            onClick={() => {
+              changeType("profile");
+              setProfileMember(m);
+            }}
+          >
+            <img
+              alt="avatar"
+              className="avatar avatar--medium"
+              src={`https://api.multiavatar.com/${m.user_id}.png`}
+            />
+            <div className="item__title">{m.username}</div>
           </div>
-        </div>
-      </React.Fragment>
+        ))}
+      </div>
     );
   };
 
   const renderedGroups = () => {
-    return (
-      <React.Fragment>
-        <div className="list__title">group 1</div>
-        {renderedMembers("group 1")}
-      </React.Fragment>
-    );
+    return <React.Fragment>{renderedMembers("group 1")}</React.Fragment>;
   };
 
   const renderedList = () => {
@@ -134,13 +161,13 @@ const DrawerRight = ({
               ) : null}
               {openMore ? (
                 <More
-                changeOpenMore={changeOpenMore}
-                openMore={openMore}
-                changeOpenAddAdminForm={changeOpenAddAdminForm}
-                changeOpenAddOwnerForm={changeOpenAddOwnerForm}
-                changeOpenInvitePeopleForm={changeOpenInvitePeopleForm}
-                changeOpenCreateRoleForm={changeOpenCreateRoleForm}
-              />
+                  changeOpenMore={changeOpenMore}
+                  openMore={openMore}
+                  changeOpenAddAdminForm={changeOpenAddAdminForm}
+                  changeOpenAddOwnerForm={changeOpenAddOwnerForm}
+                  changeOpenInvitePeopleForm={changeOpenInvitePeopleForm}
+                  changeOpenCreateRoleForm={changeOpenCreateRoleForm}
+                />
               ) : null}
             </div>
             <button
@@ -154,17 +181,24 @@ const DrawerRight = ({
         <div className="drawer__body">
           <div className="profile">
             <div className="profile__part profile__part--top">
-              <div className="avatar avatar--large"></div>
-              <div className="profile__name">Bui Hong Chien</div>
+              <img
+                alt="avatar"
+                className="avatar avatar--large"
+                src={`https://api.multiavatar.com/${profileMember.user_id}.png`}
+              />
+              <div className="profile__name">{profileMember.username}</div>
             </div>
             <div className="line" />
             {isServer ? (
               <div className="list__items">
                 <div className="list__item list__item--noselected">
                   <RiUserSettingsLine className="icon icon--green" />
-                  <div className="item item__title">group 1 leader</div>
+                  <div className="item item__title">{profileMember.role}</div>
                 </div>
-                <div className="list__item list__item--noselected">
+                <div
+                  className="list__item list__item--noselected"
+                  onClick={() => openDirectMessage()}
+                >
                   <BiMessageRoundedDots className="icon icon--green" />
                   <div className="item item__title">message</div>
                 </div>

@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { BiSearchAlt2, BiInfoCircle, BiMenu } from "react-icons/bi";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
+
+import ChatContext from "../context/ChatContext";
+
 
 const Dropdown = ({
   isServer,
@@ -19,19 +22,21 @@ const Dropdown = ({
   changeDrawerRightStatus,
   openCreateChannelForm,
 }) => {
+  const { userData } = useContext(ChatContext);
+
   const renderedOptions = () => {
     return (
       <div className="dropdown__options">
-        {channels.map((o, i) => (
+        {channels.map((c, i) => (
           <React.Fragment>
             <div
               className="dropdown__option"
               onClick={() => {
-                changeCurrchannel(o);
+                changeCurrchannel(c);
                 changeStatus(!status);
               }}
             >
-              {o}
+              {c.channel_name}
             </div>
             {i + 1 === channels.length ? null : <div className="line"></div>}
           </React.Fragment>
@@ -55,7 +60,7 @@ const Dropdown = ({
                 />
               </button>
             )}
-            <div className="dropdown__default bar-elm-2">{currChannel}</div>
+            <div className="dropdown__default bar-elm-2">{currChannel.channel_name}</div>
             <div className="icon-group bar-elm-3 icon-group--neumorphic">
               <button className="button button--icon button--neumorphic">
                 <BiSearchAlt2
@@ -110,7 +115,9 @@ const Dropdown = ({
                 />
               </button>
             )}
-            <div className="dropdown__default bar-elm-2">{friend}</div>
+            <div className="dropdown__default bar-elm-2">{friend.participant[0].user_id === userData.user.user_id
+                ? friend.participant[1].username
+                : friend.participant[0].username}</div>
             <div className="icon-group bar-elm-3 icon-group--neumorphic">
               <button className="button button--icon button--neumorphic">
                 <BiSearchAlt2 className="icon icon--white" />
@@ -159,7 +166,6 @@ export const DropdownList = ({ barTitle, options }) => {
         )}
       </div>
       {isOpen ? <div className="dopdownlist__options">
-{/* {renderedOptions()} */}
       </div> : null}
     </div>
   );

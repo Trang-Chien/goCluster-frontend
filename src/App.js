@@ -5,6 +5,7 @@ import axios from "axios";
 import ChatContext from './context/ChatContext';
 import HomePage from "./pages/HomePage";
 import WelcomePage from "./pages/WelcomePage";
+import {checkTokenRoute, getUserInfoRoute} from './utils/APIRoutes'
 
 import "./styles/app.scss";
 
@@ -14,38 +15,41 @@ const App = () => {
     user: undefined,
   });
 
-  useEffect(() => {
-    console.log("url "+process.env.REACT_APP_AUTH_TOKEN)
-    const checkedLoggin = async () => {
-      let token = localStorage.getItem(process.env.REACT_APP_AUTH_TOKEN);
-      if (token === null) {
-        localStorage.setItem(process.env.REACT_APP_AUTH_TOKEN, "");
-        token = "";
-      }
+  const [servers, setServers] = useState(null)
+  const [directMessage, setDirectMessage] = useState(null)
+  const [isLogin, setIsLogin] = useState(false)
 
-      const tokenRes = await axios.post(
-        `${process.env.REACT_APP_API}/tokenIsValid`,
-        null,
-        { headers: { "auth-token": token } }
-      );
-      if (tokenRes.data) {
-        console.log("token data" + token.data);
-        const userRes = await axios.get(`${process.env.REACT_APP_API}/user`, {
-          headers: { "auth-token": token },
-        });
-        setUserData({
-          token,
-          user: userRes.data,
-        });
-      }
-    };
+  // useEffect(() => {
+  //   const checkedLoggin = async () => {
+  //     let token = localStorage.getItem(process.env.REACT_APP_AUTH_TOKEN);
+  //     if (token === null) {
+  //       localStorage.setItem(process.env.REACT_APP_AUTH_TOKEN, "");
+  //       token = "";
+  //     }
 
-    checkedLoggin();
-  }, []);
+  //     const tokenRes = await axios.post(
+  //       checkTokenRoute,
+  //       null,
+  //       { headers: { "auth-token": token } }
+  //     );
+  //     if (tokenRes.data) {
+  //       const userRes = await axios.get(getUserInfoRoute, {
+  //         headers: { "auth-token": token },
+  //       });
+  //       setUserData({
+  //         token,
+  //         user: userRes.data,
+  //       });
+  //       setIsLogin(true)
+  //     }
+  //   };
+
+  //   checkedLoggin();
+  // }, []);
 
   return (
     <BrowserRouter>
-      <ChatContext.Provider value={{ userData, setUserData }}>
+      <ChatContext.Provider value={{ user: [userData, setUserData], server: [servers, setServers], directmsg: [directMessage, setDirectMessage], login:[isLogin, setIsLogin]  }}>
         <Routes>
           <Route path="/home" element={<HomePage />} />
           <Route path="/" element={<WelcomePage />} />

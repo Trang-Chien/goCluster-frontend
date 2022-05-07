@@ -16,6 +16,8 @@ const LoginForm = ({ logined, back }) => {
 
   const submit = async (e) => { 
     e.preventDefault();
+    console.log("login response: ")
+
 
     if (username === "" || pwd === "") {
       setError("Not all fields have been entered !");
@@ -23,16 +25,21 @@ const LoginForm = ({ logined, back }) => {
     }
 
     try {
-      const loginRes = await axios.post(loginRoute, {
+      console.log("login response: ")
+
+      const loginRes = await axios.post("/login", {
         username,
         pwd,
-      });
+      } );
+
+      console.log("login response: "+loginRes)
       setUserData(loginRes.data.user,
       );
 
       setError(null);
       logined();
     } catch (err) {
+      console.log("error: "+ err)
       err.response.data.msg && setError(err.response.data.msg);
     }
   };

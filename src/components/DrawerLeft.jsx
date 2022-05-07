@@ -1,30 +1,32 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext, useState } from "react";
+import axios from "axios";
 
 import { AiOutlineDoubleLeft, AiFillSetting } from "react-icons/ai";
 import { HiPlus } from "react-icons/hi";
 import { GoBell } from "react-icons/go";
 
 import Notifications from "./Notifications";
+import ChatContext from "../context/ChatContext";
 
 const DrawerLeft = ({
   status,
-  servers,
   currServer,
-  // rightDrawerType,
   changeRightDrawerType,
   changeCurrServer,
-  friends,
   currFriend,
   selectedFriend,
   openNotiList,
   changeOpenNotiList,
   openSettings,
   changeOpenSettings,
-  // openProfile,
   changeOpenProfile,
   changeOpenCreateServerForm,
 }) => {
   const ref = useRef();
+  const { user, server, directmsg } = useContext(ChatContext);
+  const [userData, setUserData]=user
+  const [servers, setServers] = server
+  const [directMessage, setDirectMessage] = directmsg
 
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
@@ -41,28 +43,28 @@ const DrawerLeft = ({
   }, [openNotiList, changeOpenNotiList]);
 
   const renderedServers = () => {
-    return Object.entries(servers).map(([key, value], i) => {
+    return Object.entries(servers).map((s) => {
       return (
         <React.Fragment>
           <div
             className={`list__item ${
-              key === currServer
+              s.workspace_id === currServer.workspace_id
                 ? "list__item--selected"
                 : "list__item--noselected"
             }`}
-            key={key}
+            key={s.workspace_id}
             onClick={() => {
-              console.log(`selected ${key}`);
-              changeCurrServer(key);
-              changeRightDrawerType("list")
+              console.log(`selected ${s.workspacename}`);
+              changeCurrServer(s);
+              changeRightDrawerType("list");
             }}
           >
             <img
               alt="avatar"
               className="avatar avatar--medium"
-              src={`https://api.multiavatar.com/${key}.png`}
+              src={`https://api.multiavatar.com/${s.workspacename}.png`}
             />
-            <div className="item__title">{key}</div>
+            <div className="item__title">{s.workspacename}</div>
           </div>
         </React.Fragment>
       );
@@ -70,31 +72,32 @@ const DrawerLeft = ({
   };
 
   const renderedFriends = () => {
-    return friends.map((f) => {
+    return directMessage.map((f) => {
       return (
         <React.Fragment>
           <div
             className={`list__item ${
-              f === currFriend
+              f.chat_id === currFriend.chat_id
                 ? "list__item--selected"
                 : "list__item--noselected"
             }`}
-            key={f}
+            key={f.chat_id}
             onClick={() => {
-              console.log(`selected ${f}`);
+              console.log(`selected ${f.chat_id}`);
               selectedFriend(f);
             }}
           >
             <img
               alt="avatar"
               className="avatar avatar--medium"
-              src={`https://api.multiavatar.com/${f}.png`}
+              src={`https://api.multiavatar.com/${f.chat_id}.png`}
             />
 
-            <div className="item__title">{f}</div>
-            <div className="item__note">Apr 8th, 2022</div>
+            <div className="item__title">
+              {f.participant.user_id }
+            </div>
+            <div className="item__note">{f.last_message_create_at}</div>
           </div>
-          {/* <div className="line" /> */}
         </React.Fragment>
       );
     });
@@ -146,27 +149,32 @@ const DrawerLeft = ({
             <img
               alt="avatar"
               className="avatar avatar--large"
-              src={`https://api.multiavatar.com/chienbui.png`}
+              src={`https://api.multiavatar.com/${userData.user.username}.png`}
             />
           </button>
 
-          <div className="list">
-            <div className="list__title">
-              server
-              <button className="button button--icon" onClick={()=>{
-                changeOpenCreateServerForm(true)
-              }}>
-                <HiPlus className="icon icon--small" />
-              </button>
+          <React.Fragment>
+            <div className="list">
+              <div className="list__title">
+                server
+                <button
+                  className="button button--icon"
+                  onClick={() => {
+                    changeOpenCreateServerForm(true);
+                  }}
+                >
+                  <HiPlus className="icon icon--small" />
+                </button>
+              </div>
+              <div className="line" />
+              <div className="list__items">{renderedServers()}</div>
             </div>
-            <div className="line" />
-            <div className="list__items">{renderedServers()}</div>
-          </div>
-          <div className="list">
-            <div className="list__title">friends</div>
-            <div className="line" />
-            <div className="list__items">{renderedFriends()}</div>
-          </div>
+            <div className="list">
+              <div className="list__title">Messages</div>
+              <div className="line" />
+              <div className="list__items">{renderedFriends()}</div>
+            </div>
+          </React.Fragment>
         </div>
       </div>
     </div>

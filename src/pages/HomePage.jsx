@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import MainFrame from "../components/MainFrame";
 import DrawerLeft from "../components/DrawerLeft";
@@ -7,7 +8,7 @@ import DrawerRight from "../components/DrawerRight";
 import Notifications from "../components/Notifications";
 import Settings from "../components/Settings";
 import Profile from "../components/Profile";
-import Blank from '../components/Blank';
+import Blank from "../components/Blank";
 import {
   CreateRole,
   AddAdmin,
@@ -17,14 +18,8 @@ import {
   CreateServer,
   CreateChannel,
 } from "../components/UtilsForm";
-
-const servers = {
-  ReactJS: ["Redux", "QnA"],
-  "foreigners in russia": ["st peterburgs", "mosscow"],
-  "learning languages": ["english", "chinese", "russian", "vietnamese"],
-};
-
-const friends = ["chien bui", "do thien", "nguyen ha"];
+import { allDirectMessageRoute, allServerRoute } from "../utils/APIRoutes";
+import ChatContext from "../context/ChatContext";
 
 const HomePage = () => {
   const [showLeftDrawer, setShowLeftDrawer] = useState(true);
@@ -53,19 +48,43 @@ const HomePage = () => {
   const [openAlertLeaveServer, setOpenAlertLeaveServer] = useState(false);
   const [openCreateServerForm, setOpenCreateServerForm] = useState(false);
   const [openCreateChannelForm, setOpenCreateChannelForm] = useState(false);
+  const [error, setError] = useState();
 
-  const [firstName, setFirstName] = useState(null);
-  const [lastName, setLastName] = useState(null);
-  const [username, setUsername] = useState(null);
   const navigate = useNavigate();
+  const { user, server, directmsg } = useContext(ChatContext);
+  const [userData, setUserData] = user;
+  const [servers, setServers] = server;
+  const [directMessage, setDirectMessage] = directmsg;
 
   useEffect(() => {
     if (!isLogin) navigate("/welcome");
   }, [isLogin, navigate]);
 
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const allDirectMessageRes = await axios.get(allDirectMessageRoute);
+        const allServerRes = await axios.get(allServerRoute);
+
+        const newAllDirectMessageRes = allDirectMessageRes.data.map((m) => {
+          if (m.participant[0].user_id === userData.user.user_id)
+            m.participant = m.participant[1];
+          else m.participant = m.participant[0];
+        });
+
+        setServers(allServerRes.data);
+        setDirectMessage(newAllDirectMessageRes);
+        setError(null);
+      } catch (err) {
+        err.response.data.msg && setError(err.response.data.msg);
+      }
+    };
+
+    getData();
+  }, [setServers, setDirectMessage]);
+
   const handleLeftDrawerStatus = (event) => {
-    if (currServer===null && currFriend===null)
-    setShowLeftDrawer(true);
+    if (currServer === null && currFriend === null) setShowLeftDrawer(true);
     else setShowLeftDrawer(!showLeftDrawer);
   };
 
@@ -81,8 +100,8 @@ const HomePage = () => {
     setCurrServer(server);
     setIsServer(true);
     setCurrFriend(null);
-    setChannels(servers[server]);
-    setCurrChannel(servers[server][0]);
+    setChannels(currServer.channel);
+    setCurrChannel(currServer.channel[0]);
   };
 
   const onChangeCurrChannel = (channel) => {
@@ -213,6 +232,8 @@ const HomePage = () => {
           <div className="bg-blur"></div>
           <CreateChannel
             changeOpenCreateChannelForm={onChangeOpenCreateChannelForm}
+            currServer={currServer}
+            changeCurrServer={setCurrServer}
           />
         </React.Fragment>
       ) : null}
@@ -230,12 +251,11 @@ const HomePage = () => {
         <React.Fragment>
           <DrawerLeft
             status={handleLeftDrawerStatus}
-            servers={servers}
+            setServers={setServers}
             currServer={currServer}
             rightDrawerType={rightDrawerType}
             changeRightDrawerType={onChangeType}
             changeCurrServer={onChangeCurrServer}
-            friends={friends}
             currFriend={currFriend}
             selectedFriend={onChangeCurrFriend}
             openNotiList={openNotiList}
@@ -273,7 +293,9 @@ const HomePage = () => {
             changeDrawerRightType={onChangeType}
           />
         )
-      ) : <Blank />}
+      ) : (
+        <Blank />
+      )}
 
       {showRightDrawer ? (
         <React.Fragment>
@@ -282,7 +304,9 @@ const HomePage = () => {
             type={rightDrawerType}
             changeType={onChangeType}
             isServer={isServer}
+            currServer={currServer}
             currFriend={currFriend}
+            changeCurrFriend={onChangeCurrFriend}
             openMore={openMore}
             changeOpenMore={onChangeOpenMore}
             changeOpenAddAdminForm={onChangeOpenAddAdminForm}

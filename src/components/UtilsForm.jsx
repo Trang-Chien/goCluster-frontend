@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { AiTwotoneAudio } from "react-icons/ai";
 
 import { IoIosClose } from "react-icons/io";
+import ChatContext from "../context/ChatContext";
+import { createChannelRoute, createServerRoute } from "../utils/APIRoutes";
 import { DropdownList } from "./Dropdown";
 
 const members = ["member 1", "member 2", "member 3", "member 4", "member 5"];
@@ -132,6 +136,28 @@ export const AlertLeaveServer = ({ changeOpenAlertLeaveServer }) => {
 };
 
 export const CreateServer = ({ changeOpenCreateServerForm }) => {
+  const [error, setError] = useState(null);
+  const [servername, setServername] = useState("");
+  const { server } = useContext(ChatContext);
+  const [servers, setServers] = server;
+
+  const onCreateServer = async () => {
+    if (servername === "") {
+      setError("Not all fields have been entered !");
+      return;
+    }
+
+    try {
+      const createServerRes = await axios.post(createServerRoute, {
+        workspaceName: servername,
+      });
+      setServers({ ...servers, ...createServerRes.data.workspace });
+
+      changeOpenCreateServerForm(false);
+    } catch (err) {
+      err.response.data.msg && setError(err.response.data.msg);
+    }
+  };
   return (
     <div className="template__wrapper">
       <div className="template__header">
@@ -150,10 +176,15 @@ export const CreateServer = ({ changeOpenCreateServerForm }) => {
         <input
           className="input input--template"
           placeholder="your server name..."
+          onChange={(e) => setServername(e.target.value)}
         />
+        {error !== null ? <div className="error">{error}</div> : null}
+
         <button
           className="button button--text button--copy"
-          onClick={() => changeOpenCreateServerForm(false)}
+          onClick={() => {
+            onCreateServer();
+          }}
         >
           create server
         </button>
@@ -162,9 +193,50 @@ export const CreateServer = ({ changeOpenCreateServerForm }) => {
   );
 };
 
-export const CreateChannel = ({ changeOpenCreateChannelForm }) => {
+export const CreateChannel = ({
+  changeOpenCreateChannelForm,
+  currServer,
+  changeCurrServer,
+}) => {
   const [typeChannel, setTypeChannel] = useState("public");
-  const [showMemberList, setShowMemberList] = useState(false);
+  const [error, setError] = useState(null);
+  const [channelname, setChannelname] = useState("");
+  const { server } = useContext(ChatContext);
+  const [servers, setServers] = server;
+
+  const onCreateChannel = async () => {
+    if (channelname === "") {
+      setError("Enter server name!");
+      return;
+    }
+
+    try {
+      const createChannelRes = await axios.post(createChannelRoute, {
+        channelName: channelname,
+        workspaceId: currServer.workspace_id,
+        isPrivate: typeChannel === "public" ? false : true,
+      });
+
+      const newCurrServer = currServer;
+      const newChannels = newCurrServer.channel;
+      const newServers = [...servers];
+
+      newChannels.push(createChannelRes.data.channel);
+      newCurrServer.channel = newChannels;
+
+      const index = newServers.indexOf(currServer);
+      if (index !== -1) {
+        newServers.splice(index, 1);
+        newServers.push(newCurrServer);
+        setServers(newServers);
+      }
+
+      changeCurrServer(newCurrServer);
+      changeOpenCreateChannelForm(false);
+    } catch (err) {
+      err.response.data.msg && setError(err.response.data.msg);
+    }
+  };
 
   return (
     <div className="template__wrapper">
@@ -184,13 +256,13 @@ export const CreateChannel = ({ changeOpenCreateChannelForm }) => {
         <input
           className="input input--template"
           placeholder="channel name..."
+          onChange={(e) => setChannelname(e.target.value)}
         />
         <div className="radio__wrapper">
           <div
             className="radio__option"
             onClick={() => {
               setTypeChannel("public");
-              setShowMemberList(false);
             }}
           >
             <div
@@ -206,7 +278,6 @@ export const CreateChannel = ({ changeOpenCreateChannelForm }) => {
             className="radio__option"
             onClick={() => {
               setTypeChannel("private");
-              setShowMemberList(true);
             }}
           >
             <div
@@ -219,11 +290,11 @@ export const CreateChannel = ({ changeOpenCreateChannelForm }) => {
             <div className="radio__content">private</div>
           </div>
         </div>
-        {showMemberList ? <div className="listmember"></div> : null}
+        {error !== null ? <div className="error">{error}</div> : null}
 
         <button
           className="button button--text button--copy"
-          onClick={() => changeOpenCreateChannelForm(false)}
+          onClick={() => onCreateChannel()}
         >
           create channel
         </button>
@@ -245,39 +316,54 @@ export const BackGroundWelcome = () => {
           className="star star--medium"
           style={{
             position: "absolute",
-            top: `${getRandom(1,98)}%`,
-            left: `${getRandom(1,98)}%`,
-            borderRadius: `${getRandom(20,70)}% ${getRandom(20,70)}% ${getRandom(
-              20,70
-            )}% ${getRandom(20,70)}% / ${getRandom(20,70)}% ${getRandom(
-              20,70
-            )}% ${getRandom(20,70)}% ${getRandom(20,70)}% `,
+            top: `${getRandom(1, 98)}%`,
+            left: `${getRandom(1, 98)}%`,
+            borderRadius: `${getRandom(20, 70)}% ${getRandom(
+              20,
+              70
+            )}% ${getRandom(20, 70)}% ${getRandom(20, 70)}% / ${getRandom(
+              20,
+              70
+            )}% ${getRandom(20, 70)}% ${getRandom(20, 70)}% ${getRandom(
+              20,
+              70
+            )}% `,
           }}
         ></div>
         <div
           className="star star--large"
           style={{
             position: "absolute",
-            top: `${getRandom(2,98)}%`,
-            left: `${getRandom(2,98)}%`,
-            borderRadius: `${getRandom(20,70)}% ${getRandom(20,70)}% ${getRandom(
-              20,70
-            )}% ${getRandom(20,70)}% / ${getRandom(20,70)}% ${getRandom(
-              20,70
-            )}% ${getRandom(20,70)}% ${getRandom(20,70)}% `,
+            top: `${getRandom(2, 98)}%`,
+            left: `${getRandom(2, 98)}%`,
+            borderRadius: `${getRandom(20, 70)}% ${getRandom(
+              20,
+              70
+            )}% ${getRandom(20, 70)}% ${getRandom(20, 70)}% / ${getRandom(
+              20,
+              70
+            )}% ${getRandom(20, 70)}% ${getRandom(20, 70)}% ${getRandom(
+              20,
+              70
+            )}% `,
           }}
         ></div>
         <div
           className="star star--small"
           style={{
             position: "absolute",
-            top: `${getRandom(2,98)}%`,
-            left: `${getRandom(2,98)}%`,
-            borderRadius: `${getRandom(20,70)}% ${getRandom(20,70)}% ${getRandom(
-              20,70
-            )}% ${getRandom(20,70)}% / ${getRandom(20,70)}% ${getRandom(
-              20,70
-            )}% ${getRandom(20,70)}% ${getRandom(20,70)}% `,
+            top: `${getRandom(2, 98)}%`,
+            left: `${getRandom(2, 98)}%`,
+            borderRadius: `${getRandom(20, 70)}% ${getRandom(
+              20,
+              70
+            )}% ${getRandom(20, 70)}% ${getRandom(20, 70)}% / ${getRandom(
+              20,
+              70
+            )}% ${getRandom(20, 70)}% ${getRandom(20, 70)}% ${getRandom(
+              20,
+              70
+            )}% `,
           }}
         ></div>
       </React.Fragment>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import WelcomeForm from "../components/WelcomeForm";
@@ -6,22 +6,24 @@ import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
 import TextArea from "../components/TextArea";
 import { BackGroundWelcome } from "../components/UtilsForm";
+import ChatContext from '../context/ChatContext'
 
 const WelcomePage = (props) => {
-  const [isLoggined, setIsLoggined] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [showWelcomeForm, setShowWelcomeForm] = useState(true);
   const [showForms, setShowForms] = useState(false);
+  const {login} = useContext(ChatContext)
+  const [isLogin, setIsLogin]=login;
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLoggined) navigate("/home");
-    if (!isLoggined) setShowWelcomeForm(true);
+    if (isLogin) navigate("/home");
+    if (!isLogin) setShowWelcomeForm(true);
     const timer = setTimeout(() => setShowForms(true), 6500);
     return () => clearTimeout(timer);
-  }, [isLoggined]);
+  }, [isLogin, navigate]);
 
   const onChosing = (clickedButton) => {
     setShowLoginForm(false);
@@ -38,14 +40,14 @@ const WelcomePage = (props) => {
 
   const onLogin = (event) => {
     event.preventDefault();
-    setIsLoggined(true);
+    setIsLogin(true);
   };
 
   const onRegister = () => {
     setShowLoginForm(false);
     setShowRegisterForm(false);
     setShowWelcomeForm(false);
-    setIsLoggined(true);
+    setIsLogin(true);
   };
 
   const onBack = (event) => {
@@ -54,7 +56,7 @@ const WelcomePage = (props) => {
     setShowLoginForm(false);
     setShowRegisterForm(false);
     setShowWelcomeForm(true);
-    setIsLoggined(false);
+    setIsLogin(false);
   };
 
   return (

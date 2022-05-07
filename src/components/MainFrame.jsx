@@ -34,7 +34,7 @@ const MainFrame = ({
 
   const onChangeDrawerRightStatus = () => {
     setDrawerRight(true);
-  };
+  }; 
 
   return (
     <div className="chat__wrapper">
