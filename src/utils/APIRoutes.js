@@ -1,20 +1,20 @@
-export const host = "http://127.0.0.1:1999";
+export const url = "https://apimocha.com/gocluster";
 
 // export const checkTokenRoute = `${host}/istokenvalid`;
-export const getUserInfoRoute = `${host}/user`;
+export const getUserInfoRoute = `${url}/user`;
 
-export const loginRoute = `${host}/login`;
-export const registerRoute = `${host}/register`;
-export const logoutRoute = `${host}/logout`;
+export const loginRoute = `${url}/login`;
+export const registerRoute = `${url}/register`;
+export const logoutRoute = `${url}/logout`;
 
-export const createServerRoute = `${host}/newworkspace`;
-export const createChannelRoute = `${host}/newchannel`;
-export const createDirectMessageRoute = `${host}/newpersonalchat`;
+export const createServerRoute = `${url}/newworkspace`;
+export const createChannelRoute = `${url}/newchannel`;
+export const createDirectMessageRoute = `${url}/newpersonalchat`;
 
-export const allDirectMessageRoute = `${host}/allpersonalchat`;
-export const allServerRoute = `${host}/allworkspace`;
+export const allDirectMessageRoute = `${url}/allpersonalchat`;
+export const allServerRoute = `${url}/allworkspace`;
 
-export const sendMessageRoute = `${host}/messages/addmsg`;
-export const recieveMessageRoute = `${host}/messages/getmsg`;
+export const sendMessageRoute = `${url}/messages/addmsg`;
+export const recieveMessageRoute = `${url}/messages/getmsg`;
 
 export const avatarAPI = "https://api.multiavatar.com";

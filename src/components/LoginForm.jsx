@@ -16,7 +16,6 @@ const LoginForm = ({ logined, back }) => {
 
   const submit = async (e) => { 
     e.preventDefault();
-    console.log("login response: ")
 
 
     if (username === "" || pwd === "") {
@@ -25,12 +24,12 @@ const LoginForm = ({ logined, back }) => {
     }
 
     try {
-      const loginRes = await axios.post("http://127.0.0.1:1999/login", {
+      const loginRes = await axios.post(loginRoute, {
         username,
         password: pwd,
       } );
 
-      console.log("login response: "+loginRes)
+      console.log("login response: " + loginRes.data)
       setUserData({token:loginRes.data.token, user:loginRes.data.user}
       );
 

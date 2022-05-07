@@ -35,8 +35,12 @@ const RegisterForm = ({ registered, back }) => {
         password: pwd,
       };
 
-      await axios.post(registerRoute, newUser);
+      const res = await axios.post(registerRoute, newUser);
+      console.log("it wosks" + res.data)
       const loginRes = await axios.post(loginRoute, newUser);
+
+      console.log("login response: " + loginRes.data)
+
 
       setUserData({token:loginRes.data.token, user:loginRes.data.user}
         );
@@ -44,7 +48,7 @@ const RegisterForm = ({ registered, back }) => {
       setError(null);
       registered();
     } catch (err) {
-      console.log("error"+error)
+      // console.log("error"+err)
       // err.response.data.msg && setError(err.response.data.msg);
     }
   };
