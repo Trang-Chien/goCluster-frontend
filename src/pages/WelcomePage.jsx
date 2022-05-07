@@ -70,7 +70,7 @@ const WelcomePage = (props) => {
       <TextArea page="welcome" />
       {showForms ? (
         <React.Fragment>
-          <BackGroundWelcome />
+          {/* <BackGroundWelcome /> */}
           {showWelcomeForm ? <WelcomeForm choice={onChosing} /> : null}
           {showLoginForm ? <LoginForm logined={onLogin} back={onBack} /> : null}
           {showRegisterForm ? (

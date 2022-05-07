@@ -29,7 +29,7 @@ const LoginForm = ({ logined, back }) => {
 
       const loginRes = await axios.post("http://127.0.0.1:1999/login", {
         username,
-        pwd,
+        password: pwd,
       } );
 
       console.log("login response: "+loginRes)
