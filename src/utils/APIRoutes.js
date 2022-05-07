@@ -1,6 +1,6 @@
-export const host = "https://apimocha.com/gocluster";
+export const host = "http://127.0.0.1:1999";
 
-export const checkTokenRoute = `${host}/istokenvalid`;
+// export const checkTokenRoute = `${host}/istokenvalid`;
 export const getUserInfoRoute = `${host}/user`;
 
 export const loginRoute = `${host}/login`;
