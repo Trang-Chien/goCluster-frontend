@@ -40,7 +40,7 @@ const LoginForm = ({ logined, back }) => {
       logined();
     } catch (err) {
       console.log("error: "+ err)
-      err.response.data.msg && setError(err.response.data.msg);
+      // err.response.data.msg && setError(err.response.data.msg);
     }
   };
 
