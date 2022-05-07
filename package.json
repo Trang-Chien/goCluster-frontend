@@ -53,5 +53,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://apimocha.com/gocluster"
+  "proxy": "http://127.0.0.1:1999"
 }
