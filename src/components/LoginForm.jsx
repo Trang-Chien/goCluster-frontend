@@ -27,7 +27,7 @@ const LoginForm = ({ logined, back }) => {
     try {
       console.log("login response: ")
 
-      const loginRes = await axios.post("/login", {
+      const loginRes = await axios.post(loginRoute, {
         username,
         pwd,
       } );
