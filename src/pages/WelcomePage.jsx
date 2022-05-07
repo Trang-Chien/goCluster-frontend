@@ -67,7 +67,7 @@ const WelcomePage = (props) => {
         <div className="bg__status bg__status-2">sent</div>
         <div className="bg__status bg__status-3">seen</div> */}
       {/* </div> */}
-      <TextArea page="welcome" />
+      {/* <TextArea page="welcome" /> */}
       {showForms ? (
         <React.Fragment>
           {/* <BackGroundWelcome /> */}
