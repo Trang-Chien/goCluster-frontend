@@ -38,8 +38,8 @@ const RegisterForm = ({ registered, back }) => {
       await axios.post(registerRoute, newUser);
       const loginRes = await axios.post(loginRoute, newUser);
 
-      setUserData(loginRes.data.user,
-      );
+      setUserData({token:loginRes.data.token, user:loginRes.data.user}
+        );
 
       setError(null);
       registered();

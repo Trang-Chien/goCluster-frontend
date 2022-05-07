@@ -25,15 +25,13 @@ const LoginForm = ({ logined, back }) => {
     }
 
     try {
-      console.log("login response: ")
-
       const loginRes = await axios.post("http://127.0.0.1:1999/login", {
         username,
         password: pwd,
       } );
 
       console.log("login response: "+loginRes)
-      setUserData(loginRes.data.user,
+      setUserData({token:loginRes.data.token, user:loginRes.data.user}
       );
 
       setError(null);
