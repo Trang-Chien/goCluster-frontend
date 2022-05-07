@@ -35,12 +35,10 @@ const RegisterForm = ({ registered, back }) => {
         password: pwd,
       };
 
-      const res = await axios.post(registerRoute, newUser);
-      console.log("it wosks" + res.data)
+      await axios.post(registerRoute, newUser);
       const loginRes = await axios.post(loginRoute, newUser);
 
       console.log("login response: " + loginRes.data)
-
 
       setUserData({token:loginRes.data.token, user:loginRes.data.user}
         );
