@@ -38,8 +38,8 @@ Channel = {
 Personal_chat = {
 	"chat_id": "",
 	"participant": {
-		"first": user_id,
-		"second": user_id
+		"first": User,
+		"second": User
 	},
 	"last_message": Direct_message,
 	"message": array[direct_message_id]
