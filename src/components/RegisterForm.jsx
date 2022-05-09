@@ -38,15 +38,15 @@ const RegisterForm = ({ registered, back }) => {
       await axios.post(registerRoute, newUser);
       const loginRes = await axios.post(loginRoute, newUser);
 
-      console.log("login response: " + loginRes.data)
-
+      console.log(loginRes.data)
       setUserData({token:loginRes.data.token, user:loginRes.data.user}
         );
 
       setError(null);
+      
       registered();
     } catch (err) {
-      // console.log("error"+err)
+      console.log(err)
       // err.response.data.msg && setError(err.response.data.msg);
     }
   };

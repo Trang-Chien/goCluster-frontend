@@ -6,6 +6,9 @@ import { RiArrowGoBackLine } from "react-icons/ri";
 import ChatContext from "../context/ChatContext";
 import {loginRoute} from '../utils/APIRoutes';
 
+axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+
 const LoginForm = ({ logined, back }) => {
   const [username, setUsername] = useState("");
   const [pwd, setPwd] = useState("");
@@ -24,19 +27,20 @@ const LoginForm = ({ logined, back }) => {
     }
 
     try {
+      console.log("it works")
       const loginRes = await axios.post(loginRoute, {
         username,
         password: pwd,
-      } );
+      } , );
 
-      console.log("login response: " + loginRes.data)
+      console.log("it works")
+
       setUserData({token:loginRes.data.token, user:loginRes.data.user}
       );
 
       setError(null);
       logined();
     } catch (err) {
-      console.log("error: "+ err)
       // err.response.data.msg && setError(err.response.data.msg);
     }
   };

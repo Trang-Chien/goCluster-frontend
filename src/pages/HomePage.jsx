@@ -57,31 +57,38 @@ const HomePage = () => {
   const [directMessage, setDirectMessage] = directmsg;
 
   useEffect(() => {
-    if (!isLogin) navigate("/welcome");
-  }, [isLogin, navigate]);
-
-  useEffect(() => {
+    if (!isLogin) navigate("/");
     const getData = async () => {
       try {
-        const allDirectMessageRes = await axios.get(allDirectMessageRoute);
-        const allServerRes = await axios.get(allServerRoute);
-
-        const newAllDirectMessageRes = allDirectMessageRes.data.map((m) => {
-          if (m.participant[0].user_id === userData.user.user_id)
-            m.participant = m.participant[1];
-          else m.participant = m.participant[0];
+        const allDirectMessageRes = await axios.get(allDirectMessageRoute, {
+          params: { user: userData.user.username },
+        });
+        const allServerRes = await axios.get(allServerRoute, {
+          params: { user: userData.user.username },
         });
 
-        setServers(allServerRes.data);
-        setDirectMessage(newAllDirectMessageRes);
+        console.log(allDirectMessageRes.data)
+
+        const newAllDirectMessageRes = allDirectMessageRes.data.personal_chat.map((d) => ({
+          ...d,
+          with_user:d.participant.second
+            // d.participant.fist.user_id === 
+            // userData.user.user_id
+            //   ? d.participant.second
+            //   : d.participant.fist
+        }));
+        console.log(newAllDirectMessageRes)
+        setServers(allServerRes.data.workspaces);
+        setDirectMessage(allDirectMessageRes.data.personal_chat);
         setError(null);
       } catch (err) {
-        err.response.data.msg && setError(err.response.data.msg);
+        console.log(err);
+        // err.response.data.msg && setError(err.response.data.msg);
       }
     };
 
     getData();
-  }, [setServers, setDirectMessage]);
+  }, [isLogin, navigate, userData.user.username, setDirectMessage, setServers]);
 
   const handleLeftDrawerStatus = (event) => {
     if (currServer === null && currFriend === null) setShowLeftDrawer(true);
@@ -247,7 +254,7 @@ const HomePage = () => {
         </React.Fragment>
       ) : null}
 
-      {showLeftDrawer ? (
+      {showLeftDrawer && (servers || directMessage) ? (
         <React.Fragment>
           <DrawerLeft
             status={handleLeftDrawerStatus}

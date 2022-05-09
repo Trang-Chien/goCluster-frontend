@@ -19,9 +19,9 @@ const WelcomePage = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLogin) navigate("/home");
+    if (isLogin ) navigate("/dashboard");
     if (!isLogin) setShowWelcomeForm(true);
-    const timer = setTimeout(() => setShowForms(true), 6500);
+    const timer = setTimeout(() => setShowForms(true), 0);
     return () => clearTimeout(timer);
   }, [isLogin, navigate]);
 
@@ -39,11 +39,14 @@ const WelcomePage = (props) => {
   };
 
   const onLogin = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
+    
     setIsLogin(true);
   };
 
-  const onRegister = () => {
+  const onRegister = (event) => {
+    // event.preventDefault();
+
     setShowLoginForm(false);
     setShowRegisterForm(false);
     setShowWelcomeForm(false);

@@ -43,18 +43,19 @@ const DrawerLeft = ({
   }, [openNotiList, changeOpenNotiList]);
 
   const renderedServers = () => {
-    return Object.entries(servers).map((s) => {
+    console.log(servers)
+    return servers.map((s) => {
       return (
         <React.Fragment>
           <div
-            className={`list__item ${
+            className={`list__item ${currServer===null?"list__item--noselected":
               s.workspace_id === currServer.workspace_id
                 ? "list__item--selected"
                 : "list__item--noselected"
             }`}
             key={s.workspace_id}
             onClick={() => {
-              console.log(`selected ${s.workspacename}`);
+              console.log(`selected ${s.workspace_name}`);
               changeCurrServer(s);
               changeRightDrawerType("list");
             }}
@@ -62,9 +63,9 @@ const DrawerLeft = ({
             <img
               alt="avatar"
               className="avatar avatar--medium"
-              src={`https://api.multiavatar.com/${s.workspacename}.png`}
+              src={`https://api.multiavatar.com/${s.workspace_name}.png`}
             />
-            <div className="item__title">{s.workspacename}</div>
+            <div className="item__title">{s.workspace_name}</div>
           </div>
         </React.Fragment>
       );
@@ -72,11 +73,12 @@ const DrawerLeft = ({
   };
 
   const renderedFriends = () => {
+    console.log(directMessage)
     return directMessage.map((f) => {
       return (
         <React.Fragment>
           <div
-            className={`list__item ${
+            className={`list__item ${currFriend===null?"list__item--noselected":
               f.chat_id === currFriend.chat_id
                 ? "list__item--selected"
                 : "list__item--noselected"
@@ -94,9 +96,9 @@ const DrawerLeft = ({
             />
 
             <div className="item__title">
-              {f.participant.user_id }
+              {f.participant.first===userData.user.user_id?f.participant.second:f.participant.first }
             </div>
-            <div className="item__note">{f.last_message_create_at}</div>
+            <div className="item__note">{f.last_message.sent_at}</div>
           </div>
         </React.Fragment>
       );
@@ -167,12 +169,12 @@ const DrawerLeft = ({
                 </button>
               </div>
               <div className="line" />
-              <div className="list__items">{renderedServers()}</div>
+              {/* <div className="list__items">{renderedServers()}</div> */}
             </div>
             <div className="list">
               <div className="list__title">Messages</div>
               <div className="line" />
-              <div className="list__items">{renderedFriends()}</div>
+              {/* <div className="list__items">{renderedFriends()}</div> */}
             </div>
           </React.Fragment>
         </div>

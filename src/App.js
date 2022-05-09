@@ -8,12 +8,11 @@ import WelcomePage from "./pages/WelcomePage";
 import {checkTokenRoute, getUserInfoRoute} from './utils/APIRoutes'
 
 import "./styles/app.scss";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 
 const App = () => {
-  const [userData, setUserData] = useState({
-    token: undefined,
-    user: undefined,
-  });
+  const [userData, setUserData] = useState(null);
 
   const [servers, setServers] = useState(null)
   const [directMessage, setDirectMessage] = useState(null)
@@ -51,8 +50,10 @@ const App = () => {
     <BrowserRouter>
       <ChatContext.Provider value={{ user: [userData, setUserData], server: [servers, setServers], directmsg: [directMessage, setDirectMessage], login:[isLogin, setIsLogin]  }}>
         <Routes>
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/dashboard" element={<HomePage />} />
           <Route path="/" element={<WelcomePage />} />
+          <Route path='/login' element={<LoginForm/>}/>
+          <Route path='/register' element={<RegisterForm/>}/>
         </Routes>
       </ChatContext.Provider>
     </BrowserRouter>
