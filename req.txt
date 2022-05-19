@@ -1,0 +1,82 @@
+// POST /api/register
+{
+    "req":{
+        "username":"Chienbui",
+        "password":"password"
+}
+
+// POST /api/login
+{
+    "req":{
+        "username":"Chienbui",
+        "password":"password"
+}
+
+// POST /api/workspaces/create
+// Create a new workspace
+{
+    "req":{
+        “workspaceName”:”Learning languagues”,
+        “primaryOnwer”: "Chienbui"
+    }
+}
+
+// POST /api/workspaces/channels/create
+//Create a new channel
+{
+    "req":{
+        “channelName”: ”English”,
+        “workspaceId”: workspace_id,
+        “isPrivate”: false,
+        “admin”: "Chienbui"
+    }
+
+    "req":{
+        “channelName”: ”Russian”,
+        “workspaceId”: workspace_id,
+        “isPrivate”: false,
+        “admin”: "Chienbui"
+    }
+
+    "req":{
+        “channelName”: ”Chinese”,
+        “workspaceId”: workspace_id,
+        “isPrivate”: false,
+        “admin”: "Chienbui"
+    }
+}
+
+// GET /api/workspaces 
+// Get all workspaces of current user
+{
+    "req":{
+        "username":"Chienbui"
+    }
+}
+
+// GET /api/workspace/members
+// Get all members of workspace
+{
+    "req":{
+        "workspaceId": "workspaceid1",
+        "user":"Chienbui"
+    }
+}
+
+// GET /api/direct_messages
+// Get all personal chats of current user
+{
+    "req":{
+        "user":"Chienbui"
+    }
+}
+
+// GET /api/direct_message/messages
+// Retrieve all messages in a personal chat
+{
+    "req":{
+        "username":"Chienbui",
+        "chatId": chat_id
+    }
+}
+
