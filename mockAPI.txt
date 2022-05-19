@@ -6,6 +6,7 @@
     },
     "res":{
         "token":"token1",
+        "expirationTime":"",
         "user":{
             "user_id":"userid1",
             "username":"Chienbui",
