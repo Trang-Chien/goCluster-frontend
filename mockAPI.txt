@@ -1,0 +1,144 @@
+// POST /api/login
+{
+    "req":{
+        "username":"Chienbui",
+        "password":"password"
+    },
+    "res":{
+        "token":"token1",
+        "user":{
+            "user_id":"userid1",
+            "username":"Chienbui",
+            "role":["roleid1"],
+            "workspace":["workspaceid1","workspaceid2","workspaceid3"],
+            "personal_chat":["chatid1"],
+            "is_online": true
+        }
+    }
+}
+
+// GET /api/workspaces 
+// Get all workspaces of current user
+{
+    "req":{
+        "username":"Chienbui"
+    },
+    "res":{
+        "workspaces":[
+            {
+                "workspace_id":"workspaceid1",
+                "workspace_name":"Learning Languages",
+                "channel":["Chinese","Vietnamese", "English"],
+                "owner":["userid1"],
+                "member":["userid1","userid2"],
+                "member_count":2
+            },
+            {
+                "workspace_id":"workspaceid2",
+                "workspace_name":"ReactJS",
+                "channel":["channelid3","channelid4"],
+                "owner":["userid2"],
+                "member":["userid1","userid2"],
+                "member_count":2
+            },
+            {
+                "workspace_id":"workspaceid3",
+                "workspace_name":"Traveling",
+                "channel":["channelid5","channelid6"],
+                "owner":["userid2"],
+                "member":["userid1","userid2"],
+                "member_count":2
+            }
+        ]
+    }
+}
+
+// GET /api/workspace/members
+// Get all members of workspace
+{
+    "req":{
+        "workspaceId": "workspaceid1",
+        "user":"Chienbui"
+    },
+    "res":{
+        "members":[
+            {
+                "user_id":"userid1",
+                "username":"Chienbui",
+                "role":["roleid1","roleid2"],
+                "workspace":["workspaceid1","workspaceid2","workspaceid3"],
+                "personal_chat":["chatid1","chatid2"],
+                "is_online": true
+            },
+            {
+                "user_id":"userid2",
+                "username":"Trangnguyen",
+                "role":["roleid2","roleid3"],
+                "workspace":["workspaceid1","workspaceid2","workspaceid3"],
+                "personal_chat":["chatid1"],
+                "is_online": false
+            }
+        ]
+    }
+}
+
+// GET /api/direct_messages
+// Get all personal chats of current user
+{
+    "req":{
+        "user":"Chienbui"
+    },
+    "res":{
+        "personal_chat":[
+            {
+                "chat_id":"chatid1",
+                "participant":{
+                    "first":{
+                        "user_id":"userid1",
+                        "username":"Chienbui"
+                    },
+                    "second":{
+                        "user_id":"userid2",
+                        "username":"Trangnguyen"
+                    }
+                }, 
+                "last_message":{
+                    "direct_message_id":"directmessageid2",
+                    "sender_id":"userid2",
+                    "recipient_id":"userid1",
+                    "content":"Morning! It is really nice to see you today!",
+                    "sent_at":"Today at 12:09"
+                }, 
+                "message":["directmessageid1", "directmessageid2"]
+            }
+        ]
+    }
+}
+
+// GET /api/direct_message/messages
+// Retrieve all messages in a personal chat
+{
+    "req":{
+        "username":"Chienbui",
+        "chatId": "chatid1"
+    },
+    "res":{
+        "direct_message":[
+            {
+                "direct_message_id":"directmessageid1",
+                    "sender_id":"userid1",
+                    "recipient_id":"userid2",
+                    "content":"Hi there! Nice to see you too!",
+                    "sent_at":"Today at 12:05"
+            },
+            {
+                "direct_message_id":"directmessageid2",
+                    "sender_id":"userid2",
+                    "recipient_id":"userid1",
+                    "content":"this is last message user2 sent to user1",
+                    "sent_at":"Today at 12:09"
+            }
+        ]
+    }
+}
+
